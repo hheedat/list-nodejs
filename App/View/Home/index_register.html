@@ -1,0 +1,25 @@
+<%- include ../Common/header %>
+<div class="wrapper">
+    <h4><%=title%></h4>
+    <div class="register-box">
+        <form action="/home/index/register" method="POST">
+            <div>
+                <label for="email">邮箱 : </label><input type="text" name="email" placeholder=" 用于登录"/>
+                <span id="email-used"></span>
+            </div>
+            <div>
+                <label for="name">昵称 : </label><input type="text" name="name" placeholder=" 您的昵称"/>
+            </div>
+            <div>
+                <label for="pwd">密码 : </label><input type="password" name="pwd" placeholder=" 不要忘记哦"/>
+            </div>
+            <div id="warn-line">
+
+            </div>
+            <div>
+                <button type="submit">注册</button>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include ../Common/footer %>

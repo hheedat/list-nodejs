@@ -1,0 +1,16 @@
+<%- include ../Common/header %>
+<div class="wrapper">
+    <h4><%=title%></h4>
+    <div class="login-box">
+        <form action="/home/index/login" method="POST">
+            <div>
+                <label for="email">邮箱 : </label><input type="text" name="email" placeholder="登录邮箱"/>
+            </div>
+            <div>
+                <label for="pwd">密码 : </label><input type="password" name="pwd" placeholder="登录密码"/>
+            </div>
+            <button type="submit">登录</button>
+        </form>
+    </div>
+</div>
+<%- include ../Common/footer %>
