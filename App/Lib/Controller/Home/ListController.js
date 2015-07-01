@@ -100,7 +100,7 @@ module.exports = Controller("Home/BaseController", function () {
                     "isuse": 1
                 }).field("id,title,content,time").select().then(function (data) {
                     if (data) {
-                        return self.json({type: "succ", msg: data})
+                        return self.json({type: "succ", msg: data});
                     } else {
                         return self.json({type: "err", msg: "this belong id have no data"});
                     }

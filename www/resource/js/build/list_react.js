@@ -46,7 +46,7 @@ var ListCon = React.createClass({displayName: "ListCon",
             return (
                 React.createElement("div", {className: "list-item cf"}, 
                     React.createElement("span", {className: "list-title"}, item.title), 
-                    React.createElement("span", {className: "list-time"}, item.time)
+                    React.createElement("span", {className: "list-time"}, moment(item.time).endOf('day').fromNow())
                 )
             );
         });

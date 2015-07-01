@@ -46,7 +46,7 @@ var ListCon = React.createClass({
             return (
                 <div className="list-item cf">
                     <span className="list-title">{item.title}</span>
-                    <span className="list-time">{item.time}</span>
+                    <span className="list-time">{moment(item.time).endOf('day').fromNow()}</span>
                 </div>
             );
         });
