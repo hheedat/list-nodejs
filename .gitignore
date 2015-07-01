@@ -7,3 +7,4 @@ sftp-config.json
 .idea/
 App/Conf/
 *.css.map
+.module-cache

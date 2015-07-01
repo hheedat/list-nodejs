@@ -1,6 +1,6 @@
 body {
   font-family: Microsoft YaHei,Arial,SimSun,Tahoma;
-  font-size: 14px; }
+  font-size: 16px; }
 
 .hd, .info {
   margin: 0 0 10px;
@@ -29,9 +29,6 @@ body {
   .hd .site-name span:nth-child(8) {
     color: orange; }
 
-.wrapper {
-  margin: 5px 10px 0; }
-
 .login-box div {
   margin: 15px auto; }
 .login-box input {
@@ -48,4 +45,4 @@ button {
 #warn-line, #email-used {
   color: red; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=head.css.map */

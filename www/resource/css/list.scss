@@ -1,0 +1,26 @@
+@import "head";
+$list-item-border-co:#e5e5e5;
+.wrapper{
+  width:100%;
+  .list-con{
+    width:90%;
+    margin:15px auto;
+    .list-wrapper{
+      .list-head{
+
+      }
+      .list-item{
+        $list-item-height:32px;
+        height:$list-item-height;
+        line-height: $list-item-height;
+        border-bottom:1px solid $list-item-border-co;
+        .list-title{
+          float: left;
+        }
+        .list-time{
+          float: right;
+        }
+      }
+    }
+  }
+}
