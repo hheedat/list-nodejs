@@ -12,7 +12,7 @@ module.exports = Controller(function() {
 			this.super("init", http);
 			//其他的通用逻辑
             var self = this;
-            console.log("http:  " + util.inspect(http));
+            //console.log("http:  " + util.inspect(http));
 			if(http.action === "login" || http.action === "register" ||http.action==="checkMail"){
                 return ;
             }else{

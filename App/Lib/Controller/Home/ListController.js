@@ -1,3 +1,5 @@
+var moment = require("moment");
+
 module.exports = Controller("Home/BaseController",function(){
     "use strict";
     return {
@@ -11,37 +13,101 @@ module.exports = Controller("Home/BaseController",function(){
             console.log("add action in list controller");
             if(self.isPost()){
                 var title = self.post('title');
-                if(isEmpty(title)) return self.json({msg:"title is empty"});
+                if(isEmpty(title)) return self.json({type:"err",msg:"title is empty"});
 
                 var content = self.post('content');
-                var time = new Date();
+                var time = moment().format("YYYY-MM-DD hh:mm:ss");
                 var belong = self.userInfo.id;
 
                 return D("List").add({
                     title:title,
                     content:content,
                     time:time,
-                    belong:belong
+                    belong:belong,
+                    isuse:1
                 }).then(function(insertId){
                     console.log("the new list id is : "+insertId);
                     if(insertId){
-                        return self.json({"msg":"succ"});
+                        return self.json({type:"succ","msg":"success"});
                     }else{
-                        throw new Error("注册似乎出了一些问题");
+                        throw new Error("add fail");
                     }
                 }).catch(function(err){
-                    return self.json({"msg":err});
+                    return self.json({type:"err","msg":err});
                 });
             }
         },
         deleteAction:function(){
+            var self = this;
+            console.log("delete action in list controller");
+            if(self.isPost()){
+                var id = self.post("id");
+                if(isEmpty(id)) return self.json({type:"err",msg:"id is empty"});
 
+                return D("List").where({
+                    "id":id
+                }).update({
+                    "isuse":0
+                }).then(function(affectedRows){
+                    console.log("delete update affectedRows",affectedRows);
+                    if(affectedRows){
+                        return self.json({type:"succ",msg:"success"});
+                    }else{
+                        return self.json({type:"err",msg:"this id have no data"});
+                    }
+                }).catch(function(err){
+                    return self.json({type:"err",msg:err});
+                });
+            }
         },
         updateAction:function(){
+            var self = this;
+            if(self.isPost()){
+                var id = self.post("id");
+                var title = self.post("title");
+                var content = self.post("content");
+                var time = moment().format("YYYY-MM-DD hh:mm:ss");
 
+                if(isEmpty(id)||isEmpty(title)||isEmpty(content)||isEmpty(time)){
+                    return self.json({type:"err",msg:"missing parameter"});
+                }
+
+                return D("List").where({
+                    "id":id
+                }).update({
+                    "title":title,
+                    "content":content
+                }).then(function(affectedRows){
+                    console.log("update affectedRows",affectedRows);
+                    if(affectedRows){
+                        return self.json({type:"succ",msg:"success"});
+                    }else{
+                        return self.json({type:"err",msg:"this id have no data"});
+                    }
+                }).catch(function(err){
+                    return self.json({type:"err",msg:err});
+                });
+            }
         },
         checkAction:function(){
+            var self = this;
+            if(self.isPost()){
+                var belong = self.userInfo.id;
+                if(isEmpty(belong)) return self.json({type:"err",msg:"must have a belong id"});
 
+                return D("list").where({
+                    "belong":belong,
+                    "isuse":1
+                }).field("id,title,content,time").select().then(function(data){
+                    if(data){
+                        return self.json({type:"succ",msg:data})
+                    }else{
+                        return self.json({type:"err",msg:"this belong id have no data"});
+                    }
+                }).catch(function(err){
+                    return self.json({type:"err",msg:err});
+                });
+            }
         }
     }
 });
