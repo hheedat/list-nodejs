@@ -58,7 +58,52 @@ var ListCon = React.createClass({
     }
 });
 
+var ListAdd = React.createClass({
+    addList:function(e){
+        var title = this.refs.title.getDOMNode().value.trim();
+        if(!title){
+            console.log("title can not be null");
+            return ;
+        }
+        this.submitList({title:title});
+        this.refs.title.getDOMNode().value = '';
+    },
+    submitList:function(data){
+        $.ajax({
+            url:this.props.url,
+            dataType:'json',
+            type:'POST',
+            data:data,
+            success:function(data){
+                this.setState();
+            }.bind(this),
+            error:function(xhr,status,err){
+                console.error(this.props.url,status,err);
+            }.bind(this)
+        });
+    },
+    render:function(){
+        return (
+            <div className="list-add">
+                <input type="text" ref="title" placeholder="add new list ..."/>
+                <button class="add" onClick={this.addList}>add</button>
+            </div>
+        );
+    }
+});
+
+var List = React.createClass({
+    render:function(){
+        return (
+            <div className="list">
+                <ListAdd url="/home/list/add" />
+                <ListShow url="/home/list/check" pollInterval={1000*60}/>
+            </div>
+        );
+    }
+});
+
 React.render(
-    <ListShow url="/home/list/check" pollInterval={1000*60}/>,
+    <List/>,
     document.getElementById('list-con')
 );

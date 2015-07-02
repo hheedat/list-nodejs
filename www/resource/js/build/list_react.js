@@ -58,7 +58,52 @@ var ListCon = React.createClass({displayName: "ListCon",
     }
 });
 
+var ListAdd = React.createClass({displayName: "ListAdd",
+    addList:function(e){
+        var title = this.refs.title.getDOMNode().value.trim();
+        if(!title){
+            console.log("title can not be null");
+            return ;
+        }
+        this.submitList({title:title});
+        this.refs.title.getDOMNode().value = '';
+    },
+    submitList:function(data){
+        $.ajax({
+            url:this.props.url,
+            dataType:'json',
+            type:'POST',
+            data:data,
+            success:function(data){
+
+            },
+            error:function(data){
+                console.error(data);
+            }
+        });
+    },
+    render:function(){
+        return (
+            React.createElement("div", {className: "list-add"}, 
+                React.createElement("input", {type: "text", ref: "title", placeholder: "add new list ..."}), 
+                React.createElement("button", {class: "add", onClick: this.addList}, "add")
+            )
+        );
+    }
+});
+
+var List = React.createClass({displayName: "List",
+    render:function(){
+        return (
+            React.createElement("div", {className: "list"}, 
+                React.createElement(ListAdd, {url: "/home/list/add"}), 
+                React.createElement(ListShow, {url: "/home/list/check", pollInterval: 1000*60})
+            )
+        );
+    }
+});
+
 React.render(
-    React.createElement(ListShow, {url: "/home/list/check", pollInterval: 1000*60}),
+    React.createElement(List, null),
     document.getElementById('list-con')
 );
