@@ -1,5 +1,8 @@
+var dispacherList = new Dispatcher();
+
 var ListShow = React.createClass({displayName: "ListShow",
     getInitialState: function () {
+        dispacherList.on("update-list",this.loadDataFromServer);
         return {
             data: []
         };
@@ -75,11 +78,11 @@ var ListAdd = React.createClass({displayName: "ListAdd",
             type:'POST',
             data:data,
             success:function(data){
-
-            },
-            error:function(data){
-                console.error(data);
-            }
+                dispacherList.trigger("update-list");
+            }.bind(this),
+            error:function(xhr,status,err){
+                console.error(this.props.url,status,err);
+            }.bind(this)
         });
     },
     render:function(){
