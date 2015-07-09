@@ -2,6 +2,7 @@
 
 $list-item-border-co: #e5e5e5;
 $btn-add-co: #337ab7;
+$btn-close-co:#d14;
 
 .wrapper {
   width: 100%;
@@ -36,6 +37,11 @@ $btn-add-co: #337ab7;
         .list-time {
           float: right;
         }
+      }
+    }
+    .list-detail{
+      button{
+        @include btn($btn-close-co);
       }
     }
   }

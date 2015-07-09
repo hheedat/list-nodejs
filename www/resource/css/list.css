@@ -97,5 +97,17 @@ button {
         margin-right: 10px; }
       .wrapper .list-con .list-wrapper .list-item .list-time {
         float: right; }
+    .wrapper .list-con .list-detail button {
+      height: 32px;
+      line-height: 32px;
+      padding: 0 15px;
+      margin: 0 auto;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+      background-color: #d14;
+      border-radius: 5px; }
+      .wrapper .list-con .list-detail button:hover {
+        background-color: #e71b4e; }
 
 /*# sourceMappingURL=list.css.map */
