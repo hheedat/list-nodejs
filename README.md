@@ -1,2 +1,3 @@
 # list
-a web app
+a todo list.
+build use thinkjs and react.
