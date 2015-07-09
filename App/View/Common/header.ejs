@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="http://s1.qhimg.com/!67d556ec/css_reset.css"/>
     <link rel="stylesheet" href="/resource/css/login_register.css"/>
 </head>
@@ -10,20 +11,20 @@
 <div class="hd cf">
     <div class="user-status">
         <a href="/">首页</a>
-        <%if(locals.islogin){%>
-            <a href="/"><%=locals.name%></a>
-            <a href="/home/index/logout">退出</a>
-        <%}else{%>
-            <a href="/home/index/login">登录</a>
-            <a href="/home/index/register">注册</a>
-        <%}%>
+        <% if(locals.islogin){ %>
+        <a href="/"><%= locals.name %></a>
+        <a href="/home/index/logout">退出</a>
+        <% }else{ %>
+        <a href="/home/index/login">登录</a>
+        <a href="/home/index/register">注册</a>
+        <% } %>
         <a class="site-name" href="/">
             <span>List</span>
         </a>
     </div>
 </div>
-<%if(locals.info){%>
+<% if(locals.info){ %>
 <div class="info">
-   <%=info%>
+    <%= info %>
 </div>
-<%}%>
+<% } %>

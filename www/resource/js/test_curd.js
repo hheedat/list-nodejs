@@ -2,6 +2,7 @@ var URL_ADD = "/home/list/add";
 var URL_DELETE = "/home/list/delete";
 var URL_UPDATE = "/home/list/update";
 var URL_CHECK = "/home/list/check";
+var URL_CHECKDETAIL = "/home/list/checkDetail";
 
 var title = "test_title1";
 var content = "test_content";
@@ -69,6 +70,21 @@ function check() {
         },
         error: function () {
             console.log("err");
+        }
+    });
+}
+
+function checkDetail(id) {
+    $.ajax({
+        url: URL_CHECKDETAIL,
+        dataType: "json",
+        method: "post",
+        data: {id: id},
+        success: function (data) {
+            console.log("return data -> ", data);
+        },
+        error: function (err) {
+            console.log("err", err);
         }
     });
 }

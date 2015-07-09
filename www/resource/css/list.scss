@@ -1,23 +1,39 @@
 @import "head";
-$list-item-border-co:#e5e5e5;
-.wrapper{
-  width:100%;
-  .list-con{
-    width:90%;
-    margin:15px auto;
-    .list-wrapper{
-      .list-head{
+
+$list-item-border-co: #e5e5e5;
+$btn-add-co: #337ab7;
+
+.wrapper {
+  width: 100%;
+  .list-con {
+    width: 90%;
+    margin: 15px auto;
+    .list-add {
+      input {
+        float: left;
+      }
+      button {
+        float: right;
+        @include btn($btn-add-co);
+      }
+      margin-bottom: 15px;
+    }
+    .list-wrapper {
+      .list-head {
 
       }
-      .list-item{
-        $list-item-height:32px;
-        height:$list-item-height;
+      .list-item {
+        $list-item-height: 32px;
+        height: $list-item-height;
         line-height: $list-item-height;
-        border-bottom:1px solid $list-item-border-co;
-        .list-title{
-          float: left;
+        border-bottom: 1px solid $list-item-border-co;
+        input[type=checkbox]{
+          margin-right: 10px;
         }
-        .list-time{
+        .list-title {
+
+        }
+        .list-time {
           float: right;
         }
       }
