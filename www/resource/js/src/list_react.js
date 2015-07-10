@@ -77,7 +77,7 @@ var ListCon = React.createClass({
                 <div className="list-item cf" key={item.id} onClick={self.checkItemDetail.bind(self,item.id)}>
                     <input type="checkbox" data-id={item.id} onClick={self.changeItemStatus}/>
                     <span className="list-title">{item.title}</span>
-                    <span className="list-time">{moment(item.time).startOf('minute').fromNow()}</span>
+                    <span className="list-time">{moment(item.time).startOf('second').fromNow()}</span>
                 </div>
             );
         });

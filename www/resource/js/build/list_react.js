@@ -77,7 +77,7 @@ var ListCon = React.createClass({displayName: "ListCon",
                 React.createElement("div", {className: "list-item cf", key: item.id, onClick: self.checkItemDetail.bind(self,item.id)}, 
                     React.createElement("input", {type: "checkbox", "data-id": item.id, onClick: self.changeItemStatus}), 
                     React.createElement("span", {className: "list-title"}, item.title), 
-                    React.createElement("span", {className: "list-time"}, moment(item.time).startOf('minute').fromNow())
+                    React.createElement("span", {className: "list-time"}, moment(item.time).startOf('second').fromNow())
                 )
             );
         });
