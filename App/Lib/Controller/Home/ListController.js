@@ -61,7 +61,7 @@ module.exports = Controller("Home/BaseController", function () {
                 });
             }
         },
-        itemCompleteAction:function(){
+        itemCompleteAction: function () {
             var self = this;
             console.log("itemComplete action in list controller");
             if (self.isPost()) {
@@ -84,7 +84,7 @@ module.exports = Controller("Home/BaseController", function () {
                 });
             }
         },
-        itemUndoAction:function(){
+        itemUndoAction: function () {
             var self = this;
             console.log("itemUndo action in list controller");
             if (self.isPost()) {
@@ -145,7 +145,7 @@ module.exports = Controller("Home/BaseController", function () {
                 return D("list").where({
                     "belong": belong,
                     "isuse": 1,
-                    "status":1
+                    "status": 1
                 }).order('time DESC').field("id,title,time").select().then(function (data) {
                     if (data) {
                         return self.json({type: "succ", msg: data});

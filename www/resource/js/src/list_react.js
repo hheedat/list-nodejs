@@ -75,7 +75,7 @@ var ListCon = React.createClass({
         var listItem = this.props.data.map(function (item) {
             return (
                 <div className="list-item cf" key={item.id} onClick={self.checkItemDetail.bind(self,item.id)}>
-                    <input type="checkbox" data-id={item.id} onChange={self.changeItemStatus}/>
+                    <input type="checkbox" data-id={item.id} onClick={self.changeItemStatus}/>
                     <span className="list-title">{item.title}</span>
                     <span className="list-time">{moment(item.time).startOf('minute').fromNow()}</span>
                 </div>
@@ -162,14 +162,14 @@ var ListDetail = React.createClass({
             },
             success: function (data) {
                 console.log("load list detail", data);
-                this.updataList(data);
+                this.updateList(data);
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err);
             }.bind(this)
         });
     },
-    updataList: function (data) {
+    updateList: function (data) {
         if (!data) {
             return false;
         }
@@ -177,20 +177,27 @@ var ListDetail = React.createClass({
             this.setState({data: data.msg});
         }
     },
+    closeDetail: function () {
+        this.setState({data: null});
+    },
     render: function () {
         var detail = null;
         if (this.state.data) {
             detail = (
-                <div className="list-detail">
-                    <div className="list-control">
-                        <button>close</button>
-                    </div>
-                    <div className="title">
-                        <input type="text" className="input-text" ref="title" value={this.state.data.title}/>
-                        <input type="text" className="input-text" ref="time" value={this.state.data.time}/>
+                <div className="list-detail-mask" onClick={this.closeDetail}>
+                    <div className="list-detail">
+                        <div className="list-control cf">
+                            <button className="update-btn" onClick={this.updateData}>update</button>
+                            <button className="close-btn" onClick={this.closeDetail}>close</button>
+                        </div>
+                        <div className="list-detail-data">
+                            <input type="text" className="input-text" ref="title" defaultValue={this.state.data.title}/>
+                            <input type="text" className="input-text" ref="time" disabled="disabled"
+                                   value={moment(this.state.data.time).format("YYYY-MM-DD HH:mm:ss")}/>
 
-                        <div className="content">
-                            <textarea name="" id="" ref="content">{this.state.data.content}</textarea>
+                            <div className="content">
+                                <textarea name="" id="" ref="content" defaultValue={this.state.data.content}></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>

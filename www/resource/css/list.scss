@@ -2,7 +2,7 @@
 
 $list-item-border-co: #e5e5e5;
 $btn-add-co: #337ab7;
-$btn-close-co:#d14;
+$btn-close-co: #d14;
 
 .wrapper {
   width: 100%;
@@ -28,7 +28,7 @@ $btn-close-co:#d14;
         height: $list-item-height;
         line-height: $list-item-height;
         border-bottom: 1px solid $list-item-border-co;
-        input[type=checkbox]{
+        input[type=checkbox] {
           margin-right: 10px;
         }
         .list-title {
@@ -39,9 +39,47 @@ $btn-close-co:#d14;
         }
       }
     }
-    .list-detail{
-      button{
-        @include btn($btn-close-co);
+    .list-detail-mask{
+      position: fixed;
+      width:100%;
+      height:100%;
+      top:0;
+      left: 0;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .list-detail {
+      position:absolute;
+      width:80%;
+      left:50%;
+      top:20%;
+      margin-left: -40%;
+      height:80%;
+      background-color: #fff;
+      border:1px solid #e5e5e5;
+      //box-shadow: 10px 10px 5px #e5e5e5;
+      .list-control{
+        padding:5px;
+        background-color: rgba(0,0,0,0.6);
+        button.close-btn {
+          @include btn($btn-close-co);
+          float: right;
+        }
+        button.update-btn{
+          @include btn($btn-add-co);
+          float: left;
+        }
+      }
+      .list-detail-data{
+        padding:5px;
+        .input-text{
+          width:90%;
+          margin:10px auto;
+        }
+        textarea{
+          width:90%;
+          min-height:300px;
+          margin:10px auto;
+        }
       }
     }
   }

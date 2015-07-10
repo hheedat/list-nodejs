@@ -75,7 +75,7 @@ var ListCon = React.createClass({displayName: "ListCon",
         var listItem = this.props.data.map(function (item) {
             return (
                 React.createElement("div", {className: "list-item cf", key: item.id, onClick: self.checkItemDetail.bind(self,item.id)}, 
-                    React.createElement("input", {type: "checkbox", "data-id": item.id, onChange: self.changeItemStatus}), 
+                    React.createElement("input", {type: "checkbox", "data-id": item.id, onClick: self.changeItemStatus}), 
                     React.createElement("span", {className: "list-title"}, item.title), 
                     React.createElement("span", {className: "list-time"}, moment(item.time).startOf('minute').fromNow())
                 )
@@ -162,14 +162,14 @@ var ListDetail = React.createClass({displayName: "ListDetail",
             },
             success: function (data) {
                 console.log("load list detail", data);
-                this.updataList(data);
+                this.updateList(data);
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err);
             }.bind(this)
         });
     },
-    updataList: function (data) {
+    updateList: function (data) {
         if (!data) {
             return false;
         }
@@ -177,20 +177,27 @@ var ListDetail = React.createClass({displayName: "ListDetail",
             this.setState({data: data.msg});
         }
     },
+    closeDetail: function () {
+        this.setState({data: null});
+    },
     render: function () {
         var detail = null;
         if (this.state.data) {
             detail = (
-                React.createElement("div", {className: "list-detail"}, 
-                    React.createElement("div", {className: "list-control"}, 
-                        React.createElement("button", null, "close")
-                    ), 
-                    React.createElement("div", {className: "title"}, 
-                        React.createElement("input", {type: "text", className: "input-text", ref: "title", value: this.state.data.title}), 
-                        React.createElement("input", {type: "text", className: "input-text", ref: "time", value: this.state.data.time}), 
+                React.createElement("div", {className: "list-detail-mask", onClick: this.closeDetail}, 
+                    React.createElement("div", {className: "list-detail"}, 
+                        React.createElement("div", {className: "list-control cf"}, 
+                            React.createElement("button", {className: "update-btn", onClick: this.updateData}, "update"), 
+                            React.createElement("button", {className: "close-btn", onClick: this.closeDetail}, "close")
+                        ), 
+                        React.createElement("div", {className: "list-detail-data"}, 
+                            React.createElement("input", {type: "text", className: "input-text", ref: "title", defaultValue: this.state.data.title}), 
+                            React.createElement("input", {type: "text", className: "input-text", ref: "time", disabled: "disabled", 
+                                   value: moment(this.state.data.time).format("YYYY-MM-DD HH:mm:ss")}), 
 
-                        React.createElement("div", {className: "content"}, 
-                            React.createElement("textarea", {name: "", id: "", ref: "content"}, this.state.data.content)
+                            React.createElement("div", {className: "content"}, 
+                                React.createElement("textarea", {name: "", id: "", ref: "content", defaultValue: this.state.data.content})
+                            )
                         )
                     )
                 )

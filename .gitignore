@@ -8,3 +8,4 @@ sftp-config.json
 App/Conf/
 *.css.map
 .module-cache
+.DS_store
