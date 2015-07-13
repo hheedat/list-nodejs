@@ -1,7 +1,7 @@
 dispacher.list = new Dispatcher();
 
 var ListShow = React.createClass({
-    timer:null,
+    timer: null,
     getInitialState: function () {
         dispacher.list.on("update-list", this.loadDataFromServer);
         return {
@@ -34,9 +34,8 @@ var ListShow = React.createClass({
         });
         this.timer = setInterval(this.loadDataFromServer, this.props.pollInterval);
     },
-    componentWillUnmount:function(){
+    componentWillUnmount: function () {
         clearInterval(this.timer);
-        console.log("component unmount");
     },
     render: function () {
         return (
@@ -53,7 +52,6 @@ var ListShow = React.createClass({
 
 var ListCon = React.createClass({
     changeItemStatus: function (e) {
-        //console.log("e",e,e.target.checked,e.target.getAttribute("data-id"));
         e.stopPropagation();
         var url = e.target.checked ? this.props.urlItemComplete : this.props.urlItemUndo;
         return $.ajax({
@@ -73,8 +71,6 @@ var ListCon = React.createClass({
         });
     },
     checkItemDetail: function (id) {
-        //console.log(e,e.target.key);
-        console.log("id", id);
         dispacher.list.trigger("show-list-detail", id);
     },
     render: function () {
@@ -85,7 +81,9 @@ var ListCon = React.createClass({
                     <input type="checkbox" data-id={item.id} onClick={self.changeItemStatus}
                            defaultChecked={item.status ? false : true}/>
                     <span className="list-title">{item.title}</span>
-                    <span className="list-time">{moment(item.time).startOf('second').fromNow()}</span>
+                    <span className="list-time">
+                        { moment().date() != moment(item.time).date() ? moment().format("l") : moment(item.time).startOf('second').fromNow()}
+                    </span>
                 </div>
             );
         });
@@ -114,7 +112,6 @@ var ListAdd = React.createClass({
     addList: function (e) {
         var title = this.refs.title.getDOMNode().value.trim();
         if (!title) {
-            console.log("title can not be null");
             return;
         }
         this.submitList({title: title});
@@ -172,8 +169,12 @@ var ListDetail = React.createClass({
                 id: id
             },
             success: function (data) {
-                console.log("load list detail", data);
                 this.updateList(data);
+                setTimeout(function(){
+                    $(this.refs.mask.getDOMNode()).addClass("list-detail-mask-show");
+                    $(this.refs.wrapper.getDOMNode()).addClass("list-detail-wrapper-show");
+                }.bind(this));
+
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err);
@@ -207,7 +208,6 @@ var ListDetail = React.createClass({
                 content: content
             }
         }).done(function () {
-            console.log("update detail succ");
             self.closeDetail();
             dispacher.list.trigger("update-list");
         }).fail(function (data) {
@@ -226,7 +226,6 @@ var ListDetail = React.createClass({
                 id: this.dataID
             }
         }).done(function () {
-            console.log("delete succ");
             self.closeDetail();
             dispacher.list.trigger("update-list");
         }).fail(function (data) {
@@ -236,28 +235,36 @@ var ListDetail = React.createClass({
     },
     closeDetail: function (e) {
         if (!e || e.target.className == "list-detail-mask" || e.target.className == "close-btn") {
-            this.setState({data: null});
+            $(this.refs.wrapper.getDOMNode()).removeClass("list-detail-wrapper-show");
+            $(this.refs.wrapper.getDOMNode()).removeClass("list-detail-wrapper-show");
+            setTimeout(function(){
+                this.setState({data: null});
+            }.bind(this),200);
         }
     },
     render: function () {
         var detail = null;
         if (this.state.data) {
             detail = (
-                <div className="list-detail-mask" onClick={this.closeDetail}>
-                    <div className="list-detail">
-                        <div className="list-control cf">
-                            <button className="update-btn" onClick={this.updateData}>update</button>
-                            <button className="close-btn" onClick={this.closeDetail}>close</button>
-                        </div>
-                        <div className="list-detail-data">
-                            <textarea className="my-textarea" ref="title" defaultValue={this.state.data.title}/>
-                            <input type="text" className="input-text" ref="time" disabled="disabled"
-                                   value={moment(this.state.data.time).format("YYYY-MM-DD HH:mm:ss")}/>
-                            <div className="content">
-                                <textarea className="my-textarea" ref="content" defaultValue={this.state.data.content}/>
+                <div className="list-detail-mask"  ref="mask" onClick={this.closeDetail}>
+                    <div className="list-detail-wrapper" ref="wrapper">
+                        <div className="list-detail">
+                            <div className="list-control cf">
+                                <button className="update-btn" onClick={this.updateData}>update</button>
+                                <button className="close-btn" onClick={this.closeDetail}>close</button>
                             </div>
+                            <div className="list-detail-data">
+                                <textarea className="my-textarea" ref="title" defaultValue={this.state.data.title}/>
+                                <input type="text" className="input-text" ref="time" disabled="disabled"
+                                       value={moment(this.state.data.time).format("YYYY-MM-DD HH:mm:ss")}/>
+
+                                <div className="content">
+                                    <textarea className="my-textarea" ref="content"
+                                              defaultValue={this.state.data.content}/>
+                                </div>
+                            </div>
+                            <a className="del-btn" onClick={this.deleteData}>delete</a>
                         </div>
-                        <a className="del-btn" onClick={this.deleteData}>delete</a>
                     </div>
                 </div>
             )

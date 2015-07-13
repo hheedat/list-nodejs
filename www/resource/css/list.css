@@ -112,17 +112,19 @@ button {
     .wrapper .list-con .list-wrapper .list-item {
       height: 32px;
       line-height: 32px;
-      border-bottom: 1px solid #e5e5e5; }
+      border-bottom: 1px solid #e5e5e5;
+      cursor: pointer; }
       .wrapper .list-con .list-wrapper .list-item input[type=checkbox] {
         margin-right: 10px; }
       .wrapper .list-con .list-wrapper .list-item .list-title {
         display: inline-block;
-        max-width: 70%;
+        max-width: 60%;
         vertical-align: bottom;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden; }
       .wrapper .list-con .list-wrapper .list-item .list-time {
+        font-size: 12px;
         float: right; }
     .wrapper .list-con .list-detail-mask {
       position: fixed;
@@ -130,19 +132,23 @@ button {
       height: 100%;
       top: 0;
       left: 0;
+      transition: background-color 0.3s; }
+    .wrapper .list-con .list-detail-mask-show {
       background-color: rgba(0, 0, 0, 0.6); }
-    .wrapper .list-con .list-detail {
+    .wrapper .list-con .list-detail-wrapper {
       position: absolute;
+      transition: top 0.3s;
       width: 90%;
       left: 50%;
-      top: 20%;
+      top: 100%;
       margin-left: -45%;
       height: 80%;
       background-color: #fff; }
-      .wrapper .list-con .list-detail .list-control {
-        width: 90%;
+      .wrapper .list-con .list-detail-wrapper .list-detail {
+        padding: 0 18px; }
+      .wrapper .list-con .list-detail-wrapper .list-control {
         margin: 5px auto; }
-        .wrapper .list-con .list-detail .list-control button.update-btn {
+        .wrapper .list-con .list-detail-wrapper .list-control button.update-btn {
           height: 32px;
           line-height: 32px;
           padding: 0 15px;
@@ -153,10 +159,10 @@ button {
           background-color: #337ab7;
           border-radius: 5px;
           float: left;
-          margin-left: -12px; }
-          .wrapper .list-con .list-detail .list-control button.update-btn:hover {
+          margin-left: -13px; }
+          .wrapper .list-con .list-detail-wrapper .list-control button.update-btn:hover {
             background-color: #3d84c1; }
-        .wrapper .list-con .list-detail .list-control button.close-btn {
+        .wrapper .list-con .list-detail-wrapper .list-control button.close-btn {
           height: 32px;
           line-height: 32px;
           padding: 0 15px;
@@ -167,21 +173,21 @@ button {
           background-color: #d14;
           border-radius: 5px;
           float: right;
-          margin-right: -12px; }
-          .wrapper .list-con .list-detail .list-control button.close-btn:hover {
+          margin-right: -13px; }
+          .wrapper .list-con .list-detail-wrapper .list-control button.close-btn:hover {
             background-color: #e71b4e; }
-      .wrapper .list-con .list-detail .list-detail-data .input-text {
-        width: 90%;
-        margin: 10px auto; }
-      .wrapper .list-con .list-detail .list-detail-data .my-textarea {
-        width: 90%;
+      .wrapper .list-con .list-detail-wrapper .list-detail-data .input-text {
+        width: 100%;
+        margin: 5px auto 5px -13px; }
+      .wrapper .list-con .list-detail-wrapper .list-detail-data .my-textarea {
+        width: 100%;
         min-height: 50px;
-        margin: 10px auto; }
-      .wrapper .list-con .list-detail .list-detail-data .content .my-textarea {
-        width: 90%;
+        margin: 5px auto 5px -13px; }
+      .wrapper .list-con .list-detail-wrapper .list-detail-data .content .my-textarea {
+        width: 100%;
         min-height: 200px;
-        margin: 10px auto; }
-      .wrapper .list-con .list-detail .del-btn {
+        margin: 5px auto 5px -13px; }
+      .wrapper .list-con .list-detail-wrapper .del-btn {
         height: 32px;
         line-height: 32px;
         padding: 0 15px;
@@ -193,10 +199,13 @@ button {
         border-radius: 5px;
         display: block;
         padding: 0 12px;
-        width: 90%;
+        width: 100%;
+        margin: 5px auto 5px -13px;
         border: 1px solid #d14; }
-        .wrapper .list-con .list-detail .del-btn:hover {
+        .wrapper .list-con .list-detail-wrapper .del-btn:hover {
           background-color: #e71b4e; }
+    .wrapper .list-con .list-detail-wrapper-show {
+      top: 20%; }
 
 #list-complete {
   margin-top: 15px; }
