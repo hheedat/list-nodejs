@@ -115,6 +115,13 @@ button {
       border-bottom: 1px solid #e5e5e5; }
       .wrapper .list-con .list-wrapper .list-item input[type=checkbox] {
         margin-right: 10px; }
+      .wrapper .list-con .list-wrapper .list-item .list-title {
+        display: inline-block;
+        max-width: 70%;
+        vertical-align: bottom;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden; }
       .wrapper .list-con .list-wrapper .list-item .list-time {
         float: right; }
     .wrapper .list-con .list-detail-mask {
@@ -126,29 +133,15 @@ button {
       background-color: rgba(0, 0, 0, 0.6); }
     .wrapper .list-con .list-detail {
       position: absolute;
-      width: 80%;
+      width: 90%;
       left: 50%;
       top: 20%;
-      margin-left: -40%;
+      margin-left: -45%;
       height: 80%;
-      background-color: #fff;
-      border: 1px solid #e5e5e5; }
+      background-color: #fff; }
       .wrapper .list-con .list-detail .list-control {
-        padding: 5px;
-        background-color: rgba(0, 0, 0, 0.6); }
-        .wrapper .list-con .list-detail .list-control button.close-btn {
-          height: 32px;
-          line-height: 32px;
-          padding: 0 15px;
-          margin: 0 auto;
-          color: #fff;
-          font-size: 14px;
-          text-align: center;
-          background-color: #d14;
-          border-radius: 5px;
-          float: right; }
-          .wrapper .list-con .list-detail .list-control button.close-btn:hover {
-            background-color: #e71b4e; }
+        width: 90%;
+        margin: 5px auto; }
         .wrapper .list-con .list-detail .list-control button.update-btn {
           height: 32px;
           line-height: 32px;
@@ -159,20 +152,35 @@ button {
           text-align: center;
           background-color: #337ab7;
           border-radius: 5px;
-          float: left; }
+          float: left;
+          margin-left: -12px; }
           .wrapper .list-con .list-detail .list-control button.update-btn:hover {
             background-color: #3d84c1; }
-      .wrapper .list-con .list-detail .list-detail-data {
-        padding: 5px; }
-        .wrapper .list-con .list-detail .list-detail-data .input-text {
-          width: 90%;
-          margin: 10px auto; }
-        .wrapper .list-con .list-detail .list-detail-data textarea {
-          width: 90%;
-          min-height: 300px;
-          margin: 10px auto; }
-      .wrapper .list-con .list-detail .del-wp {
-        padding: 5px; }
+        .wrapper .list-con .list-detail .list-control button.close-btn {
+          height: 32px;
+          line-height: 32px;
+          padding: 0 15px;
+          margin: 0 auto;
+          color: #fff;
+          font-size: 14px;
+          text-align: center;
+          background-color: #d14;
+          border-radius: 5px;
+          float: right;
+          margin-right: -12px; }
+          .wrapper .list-con .list-detail .list-control button.close-btn:hover {
+            background-color: #e71b4e; }
+      .wrapper .list-con .list-detail .list-detail-data .input-text {
+        width: 90%;
+        margin: 10px auto; }
+      .wrapper .list-con .list-detail .list-detail-data .my-textarea {
+        width: 90%;
+        min-height: 50px;
+        margin: 10px auto; }
+      .wrapper .list-con .list-detail .list-detail-data .content .my-textarea {
+        width: 90%;
+        min-height: 200px;
+        margin: 10px auto; }
       .wrapper .list-con .list-detail .del-btn {
         height: 32px;
         line-height: 32px;
@@ -189,5 +197,16 @@ button {
         border: 1px solid #d14; }
         .wrapper .list-con .list-detail .del-btn:hover {
           background-color: #e71b4e; }
+
+#list-complete {
+  margin-top: 15px; }
+  #list-complete .show-complete {
+    margin-bottom: 10px; }
+  #list-complete .show-complete-toggle {
+    padding: 2px 5px;
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border-radius: 3px; }
 
 /*# sourceMappingURL=list.css.map */

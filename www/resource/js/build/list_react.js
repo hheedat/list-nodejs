@@ -1,6 +1,7 @@
 dispacher.list = new Dispatcher();
 
 var ListShow = React.createClass({displayName: "ListShow",
+    timer:null,
     getInitialState: function () {
         dispacher.list.on("update-list", this.loadDataFromServer);
         return {
@@ -16,6 +17,7 @@ var ListShow = React.createClass({displayName: "ListShow",
                 this.updateList(data);
             }.bind(this),
             error: function (xhr, status, err) {
+                alert("出现了一些问题");
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
@@ -30,7 +32,11 @@ var ListShow = React.createClass({displayName: "ListShow",
         this.loadDataFromServer().then(function () {
             dispacher.list.trigger("update-input-width");
         });
-        setInterval(this.loadDataFromServer, this.props.pollInterval);
+        this.timer = setInterval(this.loadDataFromServer, this.props.pollInterval);
+    },
+    componentWillUnmount:function(){
+        clearInterval(this.timer);
+        console.log("component unmount");
     },
     render: function () {
         return (
@@ -61,6 +67,7 @@ var ListCon = React.createClass({displayName: "ListCon",
                 dispacher.list.trigger("update-list");
             }.bind(this),
             error: function (xhr, status, err) {
+                alert("出现了一些问题");
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
@@ -75,7 +82,8 @@ var ListCon = React.createClass({displayName: "ListCon",
         var listItem = this.props.data.map(function (item) {
             return (
                 React.createElement("div", {className: "list-item cf", key: item.id, onClick: self.checkItemDetail.bind(self,item.id)}, 
-                    React.createElement("input", {type: "checkbox", "data-id": item.id, onClick: self.changeItemStatus}), 
+                    React.createElement("input", {type: "checkbox", "data-id": item.id, onClick: self.changeItemStatus, 
+                           defaultChecked: item.status ? false : true}), 
                     React.createElement("span", {className: "list-title"}, item.title), 
                     React.createElement("span", {className: "list-time"}, moment(item.time).startOf('second').fromNow())
                 )
@@ -128,6 +136,7 @@ var ListAdd = React.createClass({displayName: "ListAdd",
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err);
+                alert("出现了一些问题");
             }.bind(this)
         });
     },
@@ -143,7 +152,7 @@ var ListAdd = React.createClass({displayName: "ListAdd",
 });
 
 var ListDetail = React.createClass({displayName: "ListDetail",
-    dataID:null,
+    dataID: null,
     getInitialState: function () {
         dispacher.list.on("show-list-detail", this.loadDataFromServer);
         return {
@@ -168,6 +177,7 @@ var ListDetail = React.createClass({displayName: "ListDetail",
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err);
+                alert("出现了一些问题");
             }.bind(this)
         });
     },
@@ -188,44 +198,44 @@ var ListDetail = React.createClass({displayName: "ListDetail",
             return;
         }
         return $.ajax({
-            url:this.props.urlUpdate,
-            dataType:'json',
-            method:'post',
-            data:{
-                id:this.dataID,
-                title:title,
-                content:content
+            url: this.props.urlUpdate,
+            dataType: 'json',
+            method: 'post',
+            data: {
+                id: this.dataID,
+                title: title,
+                content: content
             }
-        }).done(function(){
+        }).done(function () {
             console.log("update detail succ");
             self.closeDetail();
             dispacher.list.trigger("update-list");
-        }).fail(function(data){
-            console.log("err",data);
+        }).fail(function (data) {
+            console.log("err", data);
             alert("出现了一些问题");
         });
     },
-    deleteData:function(e){
+    deleteData: function (e) {
         e.preventDefault();
         var self = this;
         return $.ajax({
-            url:this.props.urlDelete,
-            dataType:'json',
-            method:'post',
-            data:{
-                id:this.dataID
+            url: this.props.urlDelete,
+            dataType: 'json',
+            method: 'post',
+            data: {
+                id: this.dataID
             }
-        }).done(function(){
+        }).done(function () {
             console.log("delete succ");
             self.closeDetail();
             dispacher.list.trigger("update-list");
-        }).fail(function(data){
-            console.log("err",data);
+        }).fail(function (data) {
+            console.log("err", data);
             alert("出现了一些问题");
         });
     },
     closeDetail: function (e) {
-        if (!e||e.target.className == "list-detail-mask" || e.target.className == "close-btn") {
+        if (!e || e.target.className == "list-detail-mask" || e.target.className == "close-btn") {
             this.setState({data: null});
         }
     },
@@ -240,17 +250,14 @@ var ListDetail = React.createClass({displayName: "ListDetail",
                             React.createElement("button", {className: "close-btn", onClick: this.closeDetail}, "close")
                         ), 
                         React.createElement("div", {className: "list-detail-data"}, 
-                            React.createElement("input", {type: "text", className: "input-text", ref: "title", defaultValue: this.state.data.title}), 
+                            React.createElement("textarea", {className: "my-textarea", ref: "title", defaultValue: this.state.data.title}), 
                             React.createElement("input", {type: "text", className: "input-text", ref: "time", disabled: "disabled", 
                                    value: moment(this.state.data.time).format("YYYY-MM-DD HH:mm:ss")}), 
-
                             React.createElement("div", {className: "content"}, 
-                                React.createElement("textarea", {name: "", id: "", ref: "content", defaultValue: this.state.data.content})
+                                React.createElement("textarea", {className: "my-textarea", ref: "content", defaultValue: this.state.data.content})
                             )
                         ), 
-                        React.createElement("div", {className: "del-wp"}, 
-                            React.createElement("a", {className: "del-btn", onClick: this.deleteData}, "delete")
-                        )
+                        React.createElement("a", {className: "del-btn", onClick: this.deleteData}, "delete")
                     )
                 )
             )
@@ -263,18 +270,52 @@ var ListDetail = React.createClass({displayName: "ListDetail",
     }
 });
 
+var ListShowComplete = React.createClass({displayName: "ListShowComplete",
+    isShow: false,
+    toggleShow: function () {
+        if (this.isShow) {
+            //console.log(React.unmountComponentAtNode(document.getElementById("list-complete-show")));
+            this.isShow = false;
+            this.forceUpdate();
+        } else {
+            this.isShow = true;
+            this.forceUpdate();
+        }
+    },
+    render: function () {
+        var inner = this.isShow ? (
+            React.createElement("div", {id: "list-complete-show"}, 
+                React.createElement(ListShow, {url: "/home/list/checkComplete", pollInterval: 1000*60})
+            )
+        ) : null;
+        return (
+            React.createElement("div", {id: "list-complete"}, 
+                React.createElement("div", {className: "show-complete"}, 
+                    React.createElement("a", {className: "show-complete-toggle", onClick: this.toggleShow, href: "javascript:void(0);"}, 
+                        this.isShow ? "HIDE COMPLETED ITEMS" : "SHOW COMPLETED ITEMS")
+                ), 
+                inner
+            )
+        );
+    }
+});
+
 var List = React.createClass({displayName: "List",
     render: function () {
         return (
             React.createElement("div", {className: "list"}, 
                 React.createElement(ListAdd, {url: "/home/list/add"}), 
                 React.createElement(ListShow, {url: "/home/list/check", pollInterval: 1000*60}), 
-                React.createElement(ListDetail, {urlCheck: "/home/list/checkDetail", urlUpdate: "/home/list/update", urlDelete: "/home/list/delete"})
+                React.createElement(ListDetail, {urlCheck: "/home/list/checkDetail", urlUpdate: "/home/list/update", 
+                            urlDelete: "/home/list/delete"}), 
+                React.createElement(ListShowComplete, null)
             )
         );
     }
 });
 
+
+React.initializeTouchEvents(true);
 React.render(
     React.createElement(List, null),
     document.getElementById('list-con')

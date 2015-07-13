@@ -136,17 +136,18 @@ module.exports = Controller("Home/BaseController", function () {
                 });
             }
         },
-        checkAction: function () {
+        checkAction: function (status) {
             var self = this;
             if (self.isPost()) {
                 var belong = self.userInfo.id;
+                var status = status === 0 ? 0 : 1;
                 if (isEmpty(belong)) return self.json({type: "err", msg: "must have a belong id"});
 
                 return D("list").where({
                     "belong": belong,
                     "isuse": 1,
-                    "status": 1
-                }).order('time DESC').field("id,title,time").select().then(function (data) {
+                    "status": status
+                }).order('time DESC').field("id,title,time,status").select().then(function (data) {
                     if (data) {
                         return self.json({type: "succ", msg: data});
                     } else {
@@ -156,6 +157,9 @@ module.exports = Controller("Home/BaseController", function () {
                     return self.json({type: "err", msg: err});
                 });
             }
+        },
+        checkCompleteAction: function () {
+            this.action("home:list:check", [0]);
         },
         checkDetailAction: function () {
             var self = this;

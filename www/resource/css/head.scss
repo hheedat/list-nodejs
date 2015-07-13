@@ -18,6 +18,13 @@ $input-bg-co: #f5f5f5;
   }
 }
 
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
 .input-text {
   display: block;
   width: 70%;

@@ -1,6 +1,7 @@
 dispacher.list = new Dispatcher();
 
 var ListShow = React.createClass({
+    timer:null,
     getInitialState: function () {
         dispacher.list.on("update-list", this.loadDataFromServer);
         return {
@@ -16,6 +17,7 @@ var ListShow = React.createClass({
                 this.updateList(data);
             }.bind(this),
             error: function (xhr, status, err) {
+                alert("出现了一些问题");
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
@@ -30,7 +32,11 @@ var ListShow = React.createClass({
         this.loadDataFromServer().then(function () {
             dispacher.list.trigger("update-input-width");
         });
-        setInterval(this.loadDataFromServer, this.props.pollInterval);
+        this.timer = setInterval(this.loadDataFromServer, this.props.pollInterval);
+    },
+    componentWillUnmount:function(){
+        clearInterval(this.timer);
+        console.log("component unmount");
     },
     render: function () {
         return (
@@ -61,6 +67,7 @@ var ListCon = React.createClass({
                 dispacher.list.trigger("update-list");
             }.bind(this),
             error: function (xhr, status, err) {
+                alert("出现了一些问题");
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
@@ -75,7 +82,8 @@ var ListCon = React.createClass({
         var listItem = this.props.data.map(function (item) {
             return (
                 <div className="list-item cf" key={item.id} onClick={self.checkItemDetail.bind(self,item.id)}>
-                    <input type="checkbox" data-id={item.id} onClick={self.changeItemStatus}/>
+                    <input type="checkbox" data-id={item.id} onClick={self.changeItemStatus}
+                           defaultChecked={item.status ? false : true}/>
                     <span className="list-title">{item.title}</span>
                     <span className="list-time">{moment(item.time).startOf('second').fromNow()}</span>
                 </div>
@@ -128,6 +136,7 @@ var ListAdd = React.createClass({
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err);
+                alert("出现了一些问题");
             }.bind(this)
         });
     },
@@ -143,7 +152,7 @@ var ListAdd = React.createClass({
 });
 
 var ListDetail = React.createClass({
-    dataID:null,
+    dataID: null,
     getInitialState: function () {
         dispacher.list.on("show-list-detail", this.loadDataFromServer);
         return {
@@ -168,6 +177,7 @@ var ListDetail = React.createClass({
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err);
+                alert("出现了一些问题");
             }.bind(this)
         });
     },
@@ -188,44 +198,44 @@ var ListDetail = React.createClass({
             return;
         }
         return $.ajax({
-            url:this.props.urlUpdate,
-            dataType:'json',
-            method:'post',
-            data:{
-                id:this.dataID,
-                title:title,
-                content:content
+            url: this.props.urlUpdate,
+            dataType: 'json',
+            method: 'post',
+            data: {
+                id: this.dataID,
+                title: title,
+                content: content
             }
-        }).done(function(){
+        }).done(function () {
             console.log("update detail succ");
             self.closeDetail();
             dispacher.list.trigger("update-list");
-        }).fail(function(data){
-            console.log("err",data);
+        }).fail(function (data) {
+            console.log("err", data);
             alert("出现了一些问题");
         });
     },
-    deleteData:function(e){
+    deleteData: function (e) {
         e.preventDefault();
         var self = this;
         return $.ajax({
-            url:this.props.urlDelete,
-            dataType:'json',
-            method:'post',
-            data:{
-                id:this.dataID
+            url: this.props.urlDelete,
+            dataType: 'json',
+            method: 'post',
+            data: {
+                id: this.dataID
             }
-        }).done(function(){
+        }).done(function () {
             console.log("delete succ");
             self.closeDetail();
             dispacher.list.trigger("update-list");
-        }).fail(function(data){
-            console.log("err",data);
+        }).fail(function (data) {
+            console.log("err", data);
             alert("出现了一些问题");
         });
     },
     closeDetail: function (e) {
-        if (!e||e.target.className == "list-detail-mask" || e.target.className == "close-btn") {
+        if (!e || e.target.className == "list-detail-mask" || e.target.className == "close-btn") {
             this.setState({data: null});
         }
     },
@@ -240,17 +250,14 @@ var ListDetail = React.createClass({
                             <button className="close-btn" onClick={this.closeDetail}>close</button>
                         </div>
                         <div className="list-detail-data">
-                            <input type="text" className="input-text" ref="title" defaultValue={this.state.data.title}/>
+                            <textarea className="my-textarea" ref="title" defaultValue={this.state.data.title}/>
                             <input type="text" className="input-text" ref="time" disabled="disabled"
                                    value={moment(this.state.data.time).format("YYYY-MM-DD HH:mm:ss")}/>
-
                             <div className="content">
-                                <textarea name="" id="" ref="content" defaultValue={this.state.data.content}></textarea>
+                                <textarea className="my-textarea" ref="content" defaultValue={this.state.data.content}/>
                             </div>
                         </div>
-                        <div className="del-wp">
-                            <a className="del-btn" onClick={this.deleteData}>delete</a>
-                        </div>
+                        <a className="del-btn" onClick={this.deleteData}>delete</a>
                     </div>
                 </div>
             )
@@ -263,18 +270,52 @@ var ListDetail = React.createClass({
     }
 });
 
+var ListShowComplete = React.createClass({
+    isShow: false,
+    toggleShow: function () {
+        if (this.isShow) {
+            //console.log(React.unmountComponentAtNode(document.getElementById("list-complete-show")));
+            this.isShow = false;
+            this.forceUpdate();
+        } else {
+            this.isShow = true;
+            this.forceUpdate();
+        }
+    },
+    render: function () {
+        var inner = this.isShow ? (
+            <div id="list-complete-show">
+                <ListShow url="/home/list/checkComplete" pollInterval={1000*60}/>
+            </div>
+        ) : null;
+        return (
+            <div id="list-complete">
+                <div className="show-complete">
+                    <a className="show-complete-toggle" onClick={this.toggleShow} href="javascript:void(0);">
+                        {this.isShow ? "HIDE COMPLETED ITEMS" : "SHOW COMPLETED ITEMS"}</a>
+                </div>
+                {inner}
+            </div>
+        );
+    }
+});
+
 var List = React.createClass({
     render: function () {
         return (
             <div className="list">
                 <ListAdd url="/home/list/add"/>
                 <ListShow url="/home/list/check" pollInterval={1000*60}/>
-                <ListDetail urlCheck="/home/list/checkDetail"  urlUpdate="/home/list/update" urlDelete="/home/list/delete"/>
+                <ListDetail urlCheck="/home/list/checkDetail" urlUpdate="/home/list/update"
+                            urlDelete="/home/list/delete"/>
+                <ListShowComplete/>
             </div>
         );
     }
 });
 
+
+React.initializeTouchEvents(true);
 React.render(
     <List/>,
     document.getElementById('list-con')
