@@ -171,5 +171,23 @@ button {
           width: 90%;
           min-height: 300px;
           margin: 10px auto; }
+      .wrapper .list-con .list-detail .del-wp {
+        padding: 5px; }
+      .wrapper .list-con .list-detail .del-btn {
+        height: 32px;
+        line-height: 32px;
+        padding: 0 15px;
+        margin: 0 auto;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        background-color: #d14;
+        border-radius: 5px;
+        display: block;
+        padding: 0 12px;
+        width: 90%;
+        border: 1px solid #d14; }
+        .wrapper .list-con .list-detail .del-btn:hover {
+          background-color: #e71b4e; }
 
 /*# sourceMappingURL=list.css.map */

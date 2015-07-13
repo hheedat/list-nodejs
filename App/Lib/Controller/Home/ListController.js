@@ -113,9 +113,9 @@ module.exports = Controller("Home/BaseController", function () {
                 var id = self.post("id");
                 var title = self.post("title");
                 var content = self.post("content");
-                var time = moment().format("YYYY-MM-DD hh:mm:ss");
+                //var time = moment().format("YYYY-MM-DD hh:mm:ss");
 
-                if (isEmpty(id) || isEmpty(title) || isEmpty(content) || isEmpty(time)) {
+                if (isEmpty(id) || isEmpty(title) || isEmpty(content)) {
                     return self.json({type: "err", msg: "missing parameter"});
                 }
 

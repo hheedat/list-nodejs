@@ -13,14 +13,14 @@ var ListShow = React.createClass({
             dataType: 'json',
             method: 'post',
             success: function (data) {
-                this.updataList(data);
+                this.updateList(data);
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
     },
-    updataList: function (data) {
+    updateList: function (data) {
         if (!data) {
             return false;
         }
@@ -143,6 +143,7 @@ var ListAdd = React.createClass({
 });
 
 var ListDetail = React.createClass({
+    dataID:null,
     getInitialState: function () {
         dispacher.list.on("show-list-detail", this.loadDataFromServer);
         return {
@@ -153,8 +154,9 @@ var ListDetail = React.createClass({
         //this.loadDataFromServer();
     },
     loadDataFromServer: function (e, id) {
+        this.dataID = id;
         return $.ajax({
-            url: this.props.url,
+            url: this.props.urlCheck,
             dataType: 'json',
             type: 'POST',
             data: {
@@ -177,8 +179,55 @@ var ListDetail = React.createClass({
             this.setState({data: data.msg});
         }
     },
-    closeDetail: function () {
-        this.setState({data: null});
+    updateData: function () {
+        var self = this;
+        var title = this.refs.title.getDOMNode().value.trim();
+        var content = this.refs.content.getDOMNode().value.trim();
+        if (!title) {
+            alert("title can not be null");
+            return;
+        }
+        return $.ajax({
+            url:this.props.urlUpdate,
+            dataType:'json',
+            method:'post',
+            data:{
+                id:this.dataID,
+                title:title,
+                content:content
+            }
+        }).done(function(){
+            console.log("update detail succ");
+            self.closeDetail();
+            dispacher.list.trigger("update-list");
+        }).fail(function(data){
+            console.log("err",data);
+            alert("出现了一些问题");
+        });
+    },
+    deleteData:function(e){
+        e.preventDefault();
+        var self = this;
+        return $.ajax({
+            url:this.props.urlDelete,
+            dataType:'json',
+            method:'post',
+            data:{
+                id:this.dataID
+            }
+        }).done(function(){
+            console.log("delete succ");
+            self.closeDetail();
+            dispacher.list.trigger("update-list");
+        }).fail(function(data){
+            console.log("err",data);
+            alert("出现了一些问题");
+        });
+    },
+    closeDetail: function (e) {
+        if (!e||e.target.className == "list-detail-mask" || e.target.className == "close-btn") {
+            this.setState({data: null});
+        }
     },
     render: function () {
         var detail = null;
@@ -199,6 +248,9 @@ var ListDetail = React.createClass({
                                 <textarea name="" id="" ref="content" defaultValue={this.state.data.content}></textarea>
                             </div>
                         </div>
+                        <div className="del-wp">
+                            <a className="del-btn" onClick={this.deleteData}>delete</a>
+                        </div>
                     </div>
                 </div>
             )
@@ -217,7 +269,7 @@ var List = React.createClass({
             <div className="list">
                 <ListAdd url="/home/list/add"/>
                 <ListShow url="/home/list/check" pollInterval={1000*60}/>
-                <ListDetail url="/home/list/checkDetail"/>
+                <ListDetail urlCheck="/home/list/checkDetail"  urlUpdate="/home/list/update" urlDelete="/home/list/delete"/>
             </div>
         );
     }

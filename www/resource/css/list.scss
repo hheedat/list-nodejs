@@ -81,6 +81,16 @@ $btn-close-co: #d14;
           margin:10px auto;
         }
       }
+      .del-wp{
+        padding:5px;
+      }
+      .del-btn{
+        @include btn($btn-close-co);
+        display: block;
+        padding:0 12px;
+        width:90%;
+        border: 1px solid #d14;
+      }
     }
   }
 }
