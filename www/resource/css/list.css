@@ -44,9 +44,12 @@ body {
   font-family: Microsoft YaHei, Arial, SimSun, Tahoma;
   font-size: 16px; }
 
-.hd, .info {
+.hd, .warning-info {
   margin: 0 0 10px;
   padding: 0 10px; }
+
+.warning-info {
+  color: red; }
 
 .hd {
   border-bottom: 1px solid #e0e0e0; }
@@ -70,19 +73,6 @@ body {
     color: orange; }
   .hd .site-name span:nth-child(8) {
     color: orange; }
-
-.login-box div {
-  margin: 15px auto; }
-.login-box input {
-  padding: 2px; }
-
-.register-box div {
-  margin: 15px auto; }
-.register-box input {
-  padding: 2px; }
-
-button {
-  padding: 3px; }
 
 #warn-line, #email-used {
   color: red; }
@@ -217,5 +207,48 @@ button {
     background-color: rgba(0, 0, 0, 0.3);
     color: white;
     border-radius: 3px; }
+
+.loading-bar {
+  position: absolute;
+  left: 0;
+  top: -2px;
+  height: 4px;
+  width: 100%;
+  overflow-x: hidden; }
+  .loading-bar .loading {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0; }
+  .loading-bar .is-loading {
+    height: 2px;
+    z-index: 10;
+    background: #337ab7;
+    transform: translateX(-100%, 2px);
+    -webkit-animation-name: loading_a;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-out; }
+  .loading-bar .loading-complete {
+    height: 2px;
+    z-index: 10;
+    background: #337ab7;
+    -webkit-animation-name: loading_b;
+    -webkit-animation-duration: 0.2s;
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in; }
+
+@-webkit-keyframes loading_a {
+  0% {
+    transform: translate(-100%, 2px); }
+  100% {
+    transform: translate(-60%, 2px); } }
+@-webkit-keyframes loading_b {
+  0% {
+    transform: translate(-60%, 2px); }
+  100% {
+    transform: translate(0, 2px); } }
 
 /*# sourceMappingURL=list.css.map */

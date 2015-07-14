@@ -44,9 +44,12 @@ body {
   font-family: Microsoft YaHei, Arial, SimSun, Tahoma;
   font-size: 16px; }
 
-.hd, .info {
+.hd, .warning-info {
   margin: 0 0 10px;
   padding: 0 10px; }
+
+.warning-info {
+  color: red; }
 
 .hd {
   border-bottom: 1px solid #e0e0e0; }
@@ -70,19 +73,6 @@ body {
     color: orange; }
   .hd .site-name span:nth-child(8) {
     color: orange; }
-
-.login-box div {
-  margin: 15px auto; }
-.login-box input {
-  padding: 2px; }
-
-.register-box div {
-  margin: 15px auto; }
-.register-box input {
-  padding: 2px; }
-
-button {
-  padding: 3px; }
 
 #warn-line, #email-used {
   color: red; }

@@ -52,7 +52,7 @@ $btn-close-co: #d14;
       //background-position: center center;
       //background-repeat: no-repeat;
     }
-    .list-detail-mask-show{
+    .list-detail-mask-show {
       background-color: rgba(0, 0, 0, 0.6);
     }
     .list-detail-wrapper {
@@ -64,8 +64,8 @@ $btn-close-co: #d14;
       margin-left: -45%;
       height: 80%;
       background-color: #fff;
-      .list-detail{
-        padding:0 18px;
+      .list-detail {
+        padding: 0 18px;
       }
       .list-control {
         margin: 5px auto;
@@ -83,18 +83,18 @@ $btn-close-co: #d14;
       .list-detail-data {
         .input-text {
           width: 100%;
-          margin:5px auto 5px -13px;
+          margin: 5px auto 5px -13px;
         }
         .my-textarea {
           width: 100%;
           min-height: 50px;
-          margin:5px auto 5px -13px;
+          margin: 5px auto 5px -13px;
         }
         .content {
           .my-textarea {
             width: 100%;
             min-height: 200px;
-            margin:5px auto 5px -13px;
+            margin: 5px auto 5px -13px;
           }
         }
       }
@@ -103,12 +103,12 @@ $btn-close-co: #d14;
         display: block;
         padding: 0 12px;
         width: 100%;
-        margin:5px auto 5px -13px;
+        margin: 5px auto 5px -13px;
         border: 1px solid #d14;
       }
     }
-    .list-detail-wrapper-show{
-      top:20%;
+    .list-detail-wrapper-show {
+      top: 20%;
     }
   }
 }
@@ -125,5 +125,60 @@ $btn-close-co: #d14;
     background-color: rgba(0, 0, 0, 0.3);
     color: rgba(255, 255, 255, 1);
     border-radius: 3px;
+  }
+}
+
+.loading-bar {
+  position: absolute;
+  left: 0;
+  top: -2px;
+  height: 4px;
+  width: 100%;
+  overflow-x: hidden;
+
+  .loading {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+  .is-loading {
+    height: 2px;
+    z-index: 10;
+    background: $btn-add-co;
+    transform: translateX(-100%, 2px);
+    -webkit-animation-name: loading_a;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-out;
+  }
+  .loading-complete {
+    height: 2px;
+    z-index: 10;
+    background: $btn-add-co;
+    -webkit-animation-name: loading_b;
+    -webkit-animation-duration: 0.2s;
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+  }
+}
+
+@-webkit-keyframes loading_a {
+  0% {
+    transform: translate(-100%, 2px);
+  }
+  100% {
+    transform: translate(-60%, 2px);
+  }
+}
+
+@-webkit-keyframes loading_b {
+  0% {
+    transform: translate(-60%, 2px);
+  }
+  100% {
+    transform: translate(0, 2px);
   }
 }

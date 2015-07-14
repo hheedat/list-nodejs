@@ -10,6 +10,14 @@ module.exports = Controller("Home/BaseController", function () {
             var self = this;
             console.log("user info : " + self.userInfo);
             if (isEmpty(self.userInfo)) {
+                if(self.isGet()){
+                    var warning = self.get("warning");
+                    if(warning == "nologin"){
+                        self.assign({
+                            "info": "您还没有登录"
+                        });
+                    }
+                }
                 return self.display();
             } else {
                 //self.assign({

@@ -34,10 +34,7 @@ module.exports = Controller(function () {
                     if (http.controller === "Index") {
                         return;
                     }
-                    self.assign({
-                        "info": "您还没有登录"
-                    });
-                    return self.redirect("/");
+                    return self.redirect("/?warning=nologin");
                 }
             });
         }

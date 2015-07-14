@@ -9,6 +9,7 @@ var ListShow = React.createClass({
         };
     },
     loadDataFromServer: function () {
+        dispacher.list.trigger("show-loading");
         return $.ajax({
             url: this.props.url,
             dataType: 'json',
@@ -20,6 +21,8 @@ var ListShow = React.createClass({
                 alert("出现了一些问题");
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
+        }).always(function(){
+            dispacher.list.trigger("hide-loading");
         });
     },
     updateList: function (data) {
@@ -54,6 +57,7 @@ var ListCon = React.createClass({
     changeItemStatus: function (e) {
         e.stopPropagation();
         var url = e.target.checked ? this.props.urlItemComplete : this.props.urlItemUndo;
+        dispacher.list.trigger("show-loading");
         return $.ajax({
             url: url,
             dataType: 'json',
@@ -68,6 +72,8 @@ var ListCon = React.createClass({
                 alert("出现了一些问题");
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
+        }).always(function(){
+            dispacher.list.trigger("hide-loading");
         });
     },
     checkItemDetail: function (id) {
@@ -123,7 +129,8 @@ var ListAdd = React.createClass({
         }
     },
     submitList: function (data) {
-        $.ajax({
+        dispacher.list.trigger("show-loading");
+        return $.ajax({
             url: this.props.url,
             dataType: 'json',
             type: 'POST',
@@ -135,6 +142,8 @@ var ListAdd = React.createClass({
                 console.error(this.props.url, status, err);
                 alert("出现了一些问题");
             }.bind(this)
+        }).always(function(){
+            dispacher.list.trigger("hide-loading");
         });
     },
     render: function () {
@@ -161,6 +170,7 @@ var ListDetail = React.createClass({
     },
     loadDataFromServer: function (e, id) {
         this.dataID = id;
+        dispacher.list.trigger("show-loading");
         return $.ajax({
             url: this.props.urlCheck,
             dataType: 'json',
@@ -170,7 +180,7 @@ var ListDetail = React.createClass({
             },
             success: function (data) {
                 this.updateList(data);
-                setTimeout(function(){
+                setTimeout(function () {
                     $(this.refs.mask.getDOMNode()).addClass("list-detail-mask-show");
                     $(this.refs.wrapper.getDOMNode()).addClass("list-detail-wrapper-show");
                 }.bind(this));
@@ -180,6 +190,8 @@ var ListDetail = React.createClass({
                 console.error(this.props.url, status, err);
                 alert("出现了一些问题");
             }.bind(this)
+        }).always(function(){
+            dispacher.list.trigger("hide-loading");
         });
     },
     updateList: function (data) {
@@ -198,6 +210,7 @@ var ListDetail = React.createClass({
             alert("title can not be null");
             return;
         }
+        dispacher.list.trigger("show-loading");
         return $.ajax({
             url: this.props.urlUpdate,
             dataType: 'json',
@@ -213,11 +226,14 @@ var ListDetail = React.createClass({
         }).fail(function (data) {
             console.log("err", data);
             alert("出现了一些问题");
+        }).always(function(){
+            dispacher.list.trigger("hide-loading");
         });
     },
     deleteData: function (e) {
         e.preventDefault();
         var self = this;
+        dispacher.list.trigger("show-loading");
         return $.ajax({
             url: this.props.urlDelete,
             dataType: 'json',
@@ -231,22 +247,24 @@ var ListDetail = React.createClass({
         }).fail(function (data) {
             console.log("err", data);
             alert("出现了一些问题");
+        }).always(function(){
+            dispacher.list.trigger("hide-loading");
         });
     },
     closeDetail: function (e) {
-        if (!e || e.target.className == "list-detail-mask" || e.target.className == "close-btn") {
+        if (!e || e.target.className.match(/list-detail-mask/) || e.target.className == "close-btn") {
             $(this.refs.wrapper.getDOMNode()).removeClass("list-detail-wrapper-show");
             $(this.refs.wrapper.getDOMNode()).removeClass("list-detail-wrapper-show");
-            setTimeout(function(){
+            setTimeout(function () {
                 this.setState({data: null});
-            }.bind(this),200);
+            }.bind(this), 200);
         }
     },
     render: function () {
         var detail = null;
         if (this.state.data) {
             detail = (
-                <div className="list-detail-mask"  ref="mask" onClick={this.closeDetail}>
+                <div className="list-detail-mask" ref="mask" onClick={this.closeDetail}>
                     <div className="list-detail-wrapper" ref="wrapper">
                         <div className="list-detail">
                             <div className="list-control cf">
@@ -307,10 +325,36 @@ var ListShowComplete = React.createClass({
     }
 });
 
+var LoadingBar = React.createClass({
+    getInitialState: function () {
+        return {
+            className: "loading"
+        };
+    },
+    componentDidMount: function () {
+        dispacher.list.on("show-loading", this.show);
+        dispacher.list.on("hide-loading", this.hide);
+    },
+    show: function () {
+        this.setState({className:"loading is-loading"});
+    },
+    hide: function () {
+        this.setState({className:"loading is-loading loading-complete"});
+    },
+    render: function () {
+        return (
+            <div className="loading-bar">
+                <div ref="loadingBar" className={this.state.className}></div>
+            </div>
+        );
+    }
+});
+
 var List = React.createClass({
     render: function () {
         return (
             <div className="list">
+                <LoadingBar/>
                 <ListAdd url="/home/list/add"/>
                 <ListShow url="/home/list/check" pollInterval={1000*60}/>
                 <ListDetail urlCheck="/home/list/checkDetail" urlUpdate="/home/list/update"
@@ -320,6 +364,7 @@ var List = React.createClass({
         );
     }
 });
+
 
 
 React.initializeTouchEvents(true);

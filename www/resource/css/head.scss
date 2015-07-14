@@ -75,9 +75,13 @@ body {
   font-size: 16px;
 }
 
-.hd, .info {
+.hd, .warning-info {
   margin: 0 0 10px;
   padding: 0 10px;
+}
+
+.warning-info{
+  color:$red;
 }
 
 .hd {
@@ -94,28 +98,6 @@ body {
       }
     }
   }
-}
-
-.login-box {
-  div {
-    margin: 15px auto;
-  }
-  input {
-    padding: 2px;
-  }
-}
-
-.register-box {
-  div {
-    margin: 15px auto;
-  }
-  input {
-    padding: 2px;
-  }
-}
-
-button {
-  padding: 3px;
 }
 
 #warn-line, #email-used {
