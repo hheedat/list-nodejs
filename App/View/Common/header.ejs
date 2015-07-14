@@ -14,7 +14,7 @@
         <a href="/">首页</a>
         <% if(locals.islogin){ %>
         <a href="/"><%= locals.name %></a>
-        <a href="/home/index/logout">退出</a>
+        <a class="logout-btn" href="/home/index/logout">退出</a>
         <% }else{ %>
         <a href="/home/index/login">登录</a>
         <a href="/home/index/register">注册</a>

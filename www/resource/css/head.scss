@@ -2,6 +2,8 @@ $color_list: green green green green orange orange orange orange;
 $red: red;
 $gray_lite: #e0e0e0;
 $input-bg-co: #f5f5f5;
+$btn-add-co: #337ab7;
+$btn-close-co: #d14;
 
 @mixin btn($color) {
   height: 32px;
@@ -28,7 +30,7 @@ $input-bg-co: #f5f5f5;
   display: block;
   width: 70%;
   height: 20px;
-  padding: 5px 12px;
+  padding: 5px 7px;
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
@@ -50,7 +52,7 @@ $input-bg-co: #f5f5f5;
 
 textarea {
   display: block;
-  padding: 5px 12px;
+  padding: 5px 7px;
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
@@ -97,6 +99,18 @@ $hd-line-height: 25px;
     //    color: nth($color_list, $i);
     //  }
     //}
+  }
+}
+
+.user-status{
+  color:$btn-add-co;
+  a{
+    color:$btn-add-co;
+  }
+  .logout-btn{
+    &:hover{
+      color:$btn-close-co;
+    }
   }
 }
 

@@ -1,13 +1,11 @@
 @import "head";
 
 $list-item-border-co: #e5e5e5;
-$btn-add-co: #337ab7;
-$btn-close-co: #d14;
 
 .wrapper {
   width: 100%;
   .list-con {
-    width: 90%;
+    width: 95%;
     margin: 15px auto;
     .list-add {
       input {
@@ -55,55 +53,58 @@ $btn-close-co: #d14;
     .list-detail-mask-show {
       background-color: rgba(0, 0, 0, 0.6);
     }
+    $padding-padding:8px;
+    $margin-val:7px;
     .list-detail-wrapper {
       position: absolute;
       transition: top 0.3s;
-      width: 90%;
+      width: 95%;
       left: 50%;
       top: 100%;
-      margin-left: -45%;
+      margin-left: -47.5%;
       height: 80%;
       background-color: #fff;
+      border-radius: 4px 4px 0 0;
       .list-detail {
-        padding: 0 18px;
+        padding: 0 ($padding-padding+5);
       }
       .list-control {
-        margin: 5px auto;
+        margin: 5px auto $margin-val;
         button.update-btn {
           @include btn($btn-add-co);
           float: left;
-          margin-left: -13px;
+          margin-left: -$padding-padding;
         }
         button.close-btn {
           @include btn($btn-close-co);
           float: right;
-          margin-right: -13px;
+          margin-right: -$padding-padding;
         }
       }
       .list-detail-data {
         .input-text {
           width: 100%;
-          margin: 5px auto 5px -13px;
+          margin: $margin-val auto $margin-val (-$padding-padding);
         }
         .my-textarea {
           width: 100%;
           min-height: 50px;
-          margin: 5px auto 5px -13px;
+          margin: $margin-val auto $margin-val (-$padding-padding);
         }
         .content {
           .my-textarea {
             width: 100%;
             min-height: 200px;
-            margin: 5px auto 5px -13px;
+            margin: $margin-val auto $margin-val (-$padding-padding);
           }
         }
       }
       .del-btn {
         @include btn($btn-close-co);
         display: block;
-        padding: 0 12px;
+        padding: 0 ($padding-padding - 1);
         width: 100%;
-        margin: 5px auto 5px -13px;
+        margin: $margin-val auto 5px (-$padding-padding);
         border: 1px solid #d14;
       }
     }
@@ -128,6 +129,7 @@ $btn-close-co: #d14;
   }
 }
 
+$loading-bar-co:orange;
 .loading-bar {
   position: absolute;
   left: 0;
@@ -145,7 +147,7 @@ $btn-close-co: #d14;
   .is-loading {
     height: 2px;
     z-index: 10;
-    background: $btn-add-co;
+    background: $loading-bar-co;
     transform: translateX(-100%, 2px);
     -webkit-animation-name: loading_a;
     -webkit-animation-duration: 5s;
@@ -156,7 +158,7 @@ $btn-close-co: #d14;
   .loading-complete {
     height: 2px;
     z-index: 10;
-    background: $btn-add-co;
+    background: $loading-bar-co;
     -webkit-animation-name: loading_b;
     -webkit-animation-duration: 0.2s;
     -webkit-animation-delay: 0.1s;
@@ -167,18 +169,22 @@ $btn-close-co: #d14;
 
 @-webkit-keyframes loading_a {
   0% {
+    -webkit-transform: translate(-100%, 2px);
     transform: translate(-100%, 2px);
   }
   100% {
+    -webkit-transform: translate(-60%, 2px);
     transform: translate(-60%, 2px);
   }
 }
 
 @-webkit-keyframes loading_b {
   0% {
+    -webkit-transform: translate(-60%, 2px);
     transform: translate(-60%, 2px);
   }
   100% {
+    -webkit-transform: translate(0, 2px);
     transform: translate(0, 2px);
   }
 }

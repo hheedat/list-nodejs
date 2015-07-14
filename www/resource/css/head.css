@@ -2,7 +2,7 @@
   display: block;
   width: 70%;
   height: 20px;
-  padding: 5px 12px;
+  padding: 5px 7px;
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
@@ -22,7 +22,7 @@
 
 textarea {
   display: block;
-  padding: 5px 12px;
+  padding: 5px 7px;
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
@@ -57,6 +57,13 @@ body {
   .hd .site-name {
     float: right;
     color: green; }
+
+.user-status {
+  color: #337ab7; }
+  .user-status a {
+    color: #337ab7; }
+  .user-status .logout-btn:hover {
+    color: #d14; }
 
 #last-update span {
   color: #696969;

@@ -13,11 +13,10 @@ module.exports = Controller(function () {
             //其他的通用逻辑
             var self = this;
             //console.log("http:  " + util.inspect(http));
-            console.log("action ->",http.action,"  controller ->",http.controller);
+            console.log("action ->", http.action, "  controller ->", http.controller);
 
             return self.session("userInfo").then(function (data) {
                 if (!isEmpty(data)) {
-                    console.log("分支 1");
                     if (http.action === "logout") {
                         return;
                     }
@@ -30,7 +29,6 @@ module.exports = Controller(function () {
                         'name': self.userInfo.name
                     });
                 } else {
-                    console.log("分支 2");
                     if (http.controller === "Index") {
                         return;
                     }

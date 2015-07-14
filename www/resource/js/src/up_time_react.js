@@ -26,7 +26,7 @@ var LastUpdateTime = React.createClass({
     render: function () {
         return (
             <span>
-                {this.state.time ? "LAST UPDATE：" + this.state.time : ""}
+                {this.state.time ? "LAST SYNC：" + this.state.time : ""}
             </span>
         );
     }
