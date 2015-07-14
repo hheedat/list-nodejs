@@ -340,6 +340,7 @@ var LoadingBar = React.createClass({
     },
     hide: function () {
         this.setState({className:"loading is-loading loading-complete"});
+        dispacher.list.trigger("last-update-time");
     },
     render: function () {
         return (
