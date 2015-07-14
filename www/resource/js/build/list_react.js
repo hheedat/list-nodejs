@@ -3,27 +3,32 @@ dispacher.list = new Dispatcher();
 var ListShow = React.createClass({displayName: "ListShow",
     timer: null,
     getInitialState: function () {
-        dispacher.list.on("update-list", this.loadDataFromServer);
         return {
             data: []
         };
     },
     loadDataFromServer: function () {
         dispacher.list.trigger("show-loading");
+
         return $.ajax({
             url: this.props.url,
             dataType: 'json',
-            method: 'post',
-            success: function (data) {
-                this.updateList(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                alert("出现了一些问题");
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        }).always(function(){
+            method: 'post'
+        }).done(function (data) {
+
+            this.updateList(data);
+
+        }.bind(this)).fail(function (xhr, status, err) {
+
+            alert("出现了一些问题");
+            console.error(this.props.url, status, err.toString());
+
+        }.bind(this)).always(function () {
+
             dispacher.list.trigger("hide-loading");
+
         });
+
     },
     updateList: function (data) {
         if (!data) {
@@ -32,12 +37,14 @@ var ListShow = React.createClass({displayName: "ListShow",
         this.setState({data: data.msg});
     },
     componentDidMount: function () {
+        dispacher.list.on("update-list", this.loadDataFromServer);
         this.loadDataFromServer().then(function () {
             dispacher.list.trigger("update-input-width");
         });
         this.timer = setInterval(this.loadDataFromServer, this.props.pollInterval);
     },
     componentWillUnmount: function () {
+        dispacher.list.off("update-list", this.loadDataFromServer);
         clearInterval(this.timer);
     },
     render: function () {
@@ -58,22 +65,27 @@ var ListCon = React.createClass({displayName: "ListCon",
         e.stopPropagation();
         var url = e.target.checked ? this.props.urlItemComplete : this.props.urlItemUndo;
         dispacher.list.trigger("show-loading");
+
         return $.ajax({
             url: url,
             dataType: 'json',
             method: 'post',
             data: {
                 id: e.target.getAttribute("data-id")
-            },
-            success: function (data) {
-                dispacher.list.trigger("update-list");
-            }.bind(this),
-            error: function (xhr, status, err) {
-                alert("出现了一些问题");
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        }).always(function(){
+            }
+        }).done(function (data) {
+
+            dispacher.list.trigger("update-list");
+
+        }).fail(function (xhr, status, err) {
+
+            alert("出现了一些问题");
+            console.error(this.props.url, status, err.toString());
+
+        }.bind(this)).always(function () {
+
             dispacher.list.trigger("hide-loading");
+
         });
     },
     checkItemDetail: function (id) {
@@ -130,20 +142,25 @@ var ListAdd = React.createClass({displayName: "ListAdd",
     },
     submitList: function (data) {
         dispacher.list.trigger("show-loading");
+
         return $.ajax({
             url: this.props.url,
             dataType: 'json',
-            type: 'POST',
-            data: data,
-            success: function (data) {
-                dispacher.list.trigger("update-list");
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err);
-                alert("出现了一些问题");
-            }.bind(this)
-        }).always(function(){
+            type: 'post',
+            data: data
+        }).done(function (data) {
+
+            dispacher.list.trigger("update-list");
+
+        }.bind(this)).fail(function (xhr, status, err) {
+
+            console.error(this.props.url, status, err);
+            alert("出现了一些问题");
+
+        }.bind(this)).always(function () {
+
             dispacher.list.trigger("hide-loading");
+
         });
     },
     render: function () {
@@ -171,27 +188,31 @@ var ListDetail = React.createClass({displayName: "ListDetail",
     loadDataFromServer: function (e, id) {
         this.dataID = id;
         dispacher.list.trigger("show-loading");
+
         return $.ajax({
             url: this.props.urlCheck,
             dataType: 'json',
             type: 'POST',
             data: {
                 id: id
-            },
-            success: function (data) {
-                this.updateList(data);
-                setTimeout(function () {
-                    $(this.refs.mask.getDOMNode()).addClass("list-detail-mask-show");
-                    $(this.refs.wrapper.getDOMNode()).addClass("list-detail-wrapper-show");
-                }.bind(this));
+            }
+        }).done(function (data) {
 
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err);
-                alert("出现了一些问题");
-            }.bind(this)
-        }).always(function(){
+            this.updateList(data);
+            setTimeout(function () {
+                $(this.refs.mask.getDOMNode()).addClass("list-detail-mask-show");
+                $(this.refs.wrapper.getDOMNode()).addClass("list-detail-wrapper-show");
+            }.bind(this));
+
+        }.bind(this)).fail(function (xhr, status, err) {
+
+            console.error(this.props.url, status, err);
+            alert("出现了一些问题");
+
+        }.bind(this)).always(function () {
+
             dispacher.list.trigger("hide-loading");
+
         });
     },
     updateList: function (data) {
@@ -211,6 +232,7 @@ var ListDetail = React.createClass({displayName: "ListDetail",
             return;
         }
         dispacher.list.trigger("show-loading");
+
         return $.ajax({
             url: this.props.urlUpdate,
             dataType: 'json',
@@ -221,19 +243,26 @@ var ListDetail = React.createClass({displayName: "ListDetail",
                 content: content
             }
         }).done(function () {
+
             self.closeDetail();
             dispacher.list.trigger("update-list");
-        }).fail(function (data) {
-            console.log("err", data);
+
+        }).fail(function (xhr, status, err) {
+
+            console.error(this.props.url, status, err);
             alert("出现了一些问题");
-        }).always(function(){
+
+        }.bind(this)).always(function () {
+
             dispacher.list.trigger("hide-loading");
+
         });
     },
     deleteData: function (e) {
         e.preventDefault();
         var self = this;
         dispacher.list.trigger("show-loading");
+
         return $.ajax({
             url: this.props.urlDelete,
             dataType: 'json',
@@ -242,13 +271,19 @@ var ListDetail = React.createClass({displayName: "ListDetail",
                 id: this.dataID
             }
         }).done(function () {
+
             self.closeDetail();
             dispacher.list.trigger("update-list");
-        }).fail(function (data) {
-            console.log("err", data);
+
+        }).fail(function (xhr, status, err) {
+
+            console.error(this.props.url, status, err);
             alert("出现了一些问题");
-        }).always(function(){
+
+        }.bind(this)).always(function () {
+
             dispacher.list.trigger("hide-loading");
+
         });
     },
     closeDetail: function (e) {
@@ -336,10 +371,10 @@ var LoadingBar = React.createClass({displayName: "LoadingBar",
         dispacher.list.on("hide-loading", this.hide);
     },
     show: function () {
-        this.setState({className:"loading is-loading"});
+        this.setState({className: "loading is-loading"});
     },
     hide: function () {
-        this.setState({className:"loading is-loading loading-complete"});
+        this.setState({className: "loading is-loading loading-complete"});
         dispacher.list.trigger("last-update-time");
     },
     render: function () {
@@ -365,7 +400,6 @@ var List = React.createClass({displayName: "List",
         );
     }
 });
-
 
 
 React.initializeTouchEvents(true);
