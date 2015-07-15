@@ -227,7 +227,8 @@ body {
     -webkit-animation-duration: 5s;
     -webkit-animation-delay: 0.1s;
     -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-out; }
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: forwards; }
   .loading-bar .loading-complete {
     height: 2px;
     z-index: 10;
@@ -236,7 +237,8 @@ body {
     -webkit-animation-duration: 0.2s;
     -webkit-animation-delay: 0.1s;
     -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-in; }
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-fill-mode: forwards; }
 
 @-webkit-keyframes loading_a {
   0% {
@@ -249,8 +251,11 @@ body {
   0% {
     -webkit-transform: translate(-60%, 2px);
     transform: translate(-60%, 2px); }
-  100% {
+  99% {
     -webkit-transform: translate(0, 2px);
-    transform: translate(0, 2px); } }
+    transform: translate(0, 2px); }
+  100% {
+    -webkit-transform: translate(-100%, 2px);
+    transform: translate(-100%, 2px); } }
 
 /*# sourceMappingURL=list.css.map */

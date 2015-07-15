@@ -154,6 +154,7 @@ $loading-bar-co:orange;
     -webkit-animation-delay: 0.1s;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: forwards;
   }
   .loading-complete {
     height: 2px;
@@ -164,6 +165,7 @@ $loading-bar-co:orange;
     -webkit-animation-delay: 0.1s;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-timing-function: ease-in;
+    -webkit-animation-fill-mode: forwards;
   }
 }
 
@@ -183,8 +185,12 @@ $loading-bar-co:orange;
     -webkit-transform: translate(-60%, 2px);
     transform: translate(-60%, 2px);
   }
-  100% {
+  99% {
     -webkit-transform: translate(0, 2px);
     transform: translate(0, 2px);
+  }
+  100% {
+    -webkit-transform: translate(-100%, 2px);
+    transform: translate(-100%, 2px);
   }
 }
