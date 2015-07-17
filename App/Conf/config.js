@@ -8,4 +8,5 @@ module.exports = {
   db_user: 'root', // 用户名
   db_pwd: '', // 密码
   db_prefix: 'think_', // 数据库表前缀
+  tpl_file_suffix: '.ejs', //模版文件名后缀
 };

@@ -1,4 +1,6 @@
-<%- include ../Common/header %>
+<%- include('../Common/header',{
+    CSSList:['/resource/css/reset.css','/resource/css/login_register.css']
+}) %>
 <div class="wrapper">
     <h4><%=title%></h4>
     <div class="login-box">
@@ -13,4 +15,9 @@
         </form>
     </div>
 </div>
-<%- include ../Common/footer %>
+<%- include('../Common/footer',{
+    JSList:[
+        '/resource/js/lib/jquery-2.1.4.min.js',
+        '/resource/js/login_register.js'
+    ]
+}) %>

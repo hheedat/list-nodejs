@@ -1,4 +1,11 @@
-<script src="/resource/js/lib/jquery-2.1.4.min.js"></script>
-<script src="/resource/js/login_register.js"></script>
+<%
+if(locals.JSList){
+    for(var i in JSList){
+%>
+    <script src="<%= JSList[i] %>"></script>
+<%
+    }
+}
+%>
 </body>
 </html>

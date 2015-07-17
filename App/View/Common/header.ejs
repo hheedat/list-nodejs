@@ -4,22 +4,30 @@
     <meta charset="UTF-8">
     <title>List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-    <link rel="stylesheet" href="http://s1.qhimg.com/!67d556ec/css_reset.css"/>
-    <link rel="stylesheet" href="/resource/css/login_register.css"/>
-    <link href="http://s3.qhimg.com/static/db53b39940f4ae12.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/resource/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <%
+        if(locals.CSSList){
+            for(var i in CSSList){
+    %>
+        <link rel="stylesheet" href="<%= CSSList[i] %>"/>
+    <%
+            }
+        }
+    %>
 </head>
 <body>
 <div class="hd cf">
     <div class="user-status">
-        <a href="/">首页</a>
         <% if(locals.islogin){ %>
-        <a href="/"><%= locals.name %></a>
-        <a class="logout-btn" href="/home/index/logout">退出</a>
+            <a href="/"><%= locals.name %></a>
+            <a class="logout-btn" href="/home/index/logout">退出</a>
         <% }else{ %>
-        <a href="/home/index/login">登录</a>
-        <a href="/home/index/register">注册</a>
+            <a href="/">首页</a>
+            <a href="/home/index/login">登录</a>
+            <a href="/home/index/register">注册</a>
         <% } %>
         <a class="site-name" href="/">
+            <span id="last-update"></span>
             <span>List 测试版</span>
         </a>
     </div>

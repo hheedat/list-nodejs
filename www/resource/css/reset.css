@@ -1,0 +1,80 @@
+body, ul, ol, dl, dd, h1, h2, h3, h4, h5, h6, pre, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font: 12px/1.5 Arial, SimSun, Tahoma, Microsoft YaHei
+}
+
+ul, ol {
+    list-style: none
+}
+
+fieldset, img {
+    border: 0
+}
+
+em {
+    font-style: normal
+}
+
+img, object, select, input, textarea, button {
+    outline: 0
+}
+
+button {
+    border: 0;
+    cursor: pointer
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed
+}
+
+caption, th {
+    text-align: left
+}
+
+q:before, q:after {
+    content: ''
+}
+
+ins, s, u, del {
+    text-decoration: none
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer
+}
+
+::selection {
+    background-color: #39f;
+    color: #fff
+}
+
+::-moz-selection {
+    background-color: #39f;
+    color: #fff
+}
+
+article, aside, dialog, footer, header, section, footer, nav, figure, hgroup {
+    display: block;
+    margin: 0;
+    padding: 0
+}
+
+.cf:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+
+.cf {
+    *zoom: 1
+}

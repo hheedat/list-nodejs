@@ -6,7 +6,7 @@ module.exports = Controller("Home/BaseController", function () {
     "use strict";
     return {
         indexAction: function () {
-            //render View/Home/index_index.html file
+            //render View/Home/index_index.ejs file
             var self = this;
             console.log("user info : " + self.userInfo);
             if (isEmpty(self.userInfo)) {
