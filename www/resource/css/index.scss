@@ -1,0 +1,70 @@
+@import "head";
+
+.main-box {
+  width: 300px;
+  margin: 50px auto;
+  border-radius: 5px;
+  h4 {
+    text-align: center;
+    color: $btn-add-co;
+    -webkit-animation-name: animation-h4;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: cubic-bezier(0.01, 1.2, 0.02, 1.2);
+    -webkit-animation-fill-mode: forwards;
+  }
+  .btn {
+    @include btn($font-green-co);
+    margin-left: 70px;
+  }
+  .warning,.msg {
+    font-size: 14px;
+    color: red;
+    margin-left: 70px;
+    margin-top: 5px;
+  }
+  .msg{
+    color:$font-green-co;
+  }
+}
+
+.item {
+  margin-top: 20px;
+}
+
+input {
+  @extend .input-text;
+  display: inline-block;
+  width: 195px;
+}
+
+label {
+  display: inline-block;
+  float: left;
+  text-align: right;
+  vertical-align: middle;
+  margin-right: 10px;
+  width: 60px;
+  line-height: 30px;
+}
+
+@-webkit-keyframes animation-h4 {
+  0% {
+    -webkit-transform: translate(0, 0);
+    transition: translate(0, 0);
+  }
+  40% {
+    -webkit-transform: translate(-100px, 0);
+    transition: translate(-100px, 0);
+  }
+  60% {
+    -webkit-transform: translate(100px, 0);
+    transform: translate(100px, 0);
+  }
+  100% {
+    -webkit-transform: translate(0, 0);
+    transition: translate(0, 0);
+  }
+}

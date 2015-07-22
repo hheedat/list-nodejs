@@ -1,7 +1,11 @@
 <%- include('../Common/header',{
-    CSSList:['/resource/css/reset.css','/resource/css/login_register.css']
+    CSSList:['/resource/css/reset.css','/resource/css/index.css']
 }) %>
-<div class="wrapper">
-    welcome to list !
-</div>
-<%- include('../Common/footer') %>
+<div id="wrapper"></div>
+<%- include('../Common/footer',{
+    JSList:[
+        '/resource/js/lib/jquery-2.1.4.min.js',
+        '/resource/js/lib/react.js',
+        '/resource/js/build/index_react.js'
+    ]
+}) %>

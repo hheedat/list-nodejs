@@ -1,9 +1,11 @@
 $color_list: green green green green orange orange orange orange;
-$red: red;
-$gray_lite: #e0e0e0;
+
+$gray-lite-co: #e0e0e0;
 $input-bg-co: #f5f5f5;
 $btn-add-co: #337ab7;
 $btn-close-co: #d14;
+$font-green-co:green;
+$font-red-co: red;
 
 @mixin btn($color) {
   height: 32px;
@@ -85,12 +87,12 @@ $hd-line-height: 25px;
 }
 
 .warning-info {
-  color: $red;
+  color: $font-red-co;
 }
 
 .hd {
   line-height: $hd-line-height;
-  border-bottom: 1px solid $gray_lite;
+  border-bottom: 1px solid $gray-lite-co;
   .site-name {
     float: right;
     color: nth($color_list, 1);
@@ -124,6 +126,6 @@ $hd-line-height: 25px;
 }
 
 #warn-line, #email-used {
-  color: $red;
+  color: $font-red-co;
 }
 
