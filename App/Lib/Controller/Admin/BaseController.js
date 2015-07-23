@@ -1,29 +1,39 @@
-module.exports = Controller(function(){
+var util = require('util');
+
+module.exports = Controller(function () {
     'use strict';
     return {
-        init: function(http){
+        init: function (http) {
+
             this.super('init', http);
             /**
-             * ÆäËûµÄÍ¨ÓÃÂß¼­
+             * å…¶ä»–çš„é€šç”¨é€»è¾‘
              */
-            //loginÇëÇó²»ÅĞ¶Ïµ±Ç°ÊÇ·ñÒÑ¾­µÇÂ¼
-            if (this.http.action === 'login') {
-                return;
-            }
 
             var self = this;
+
+            //console.log("http:  " + util.inspect(http));
+            console.log("(â•¯â€µâ–¡â€²)â•¯ï¸µâ”»â”â”»  action ->", http.action, "  controller ->", http.controller, "  group ->", http.group);
+
             return self.session('userInfo').then(function (userInfo) {
-                //ÓÃ»§ĞÅÏ¢Îª¿Õ
+
                 if (isEmpty(userInfo)) {
-                    //ajax·ÃÎÊ·µ»ØÒ»¸öjsonµÄ´íÎóĞÅÏ¢
+
+                    //ajaxè®¿é—®è¿”å›ä¸€ä¸ªjsonçš„é”™è¯¯ä¿¡æ¯
                     if (self.isAjax()) {
+
                         return self.error(403);
+
                     } else {
-                        //Ìø×ªµ½µÇÂ¼Ò³
-                        return self.redirect('login');
+
+                        self.assign({
+                            "info": "æ²¡æœ‰ç™»å½•,å°±æƒ³è®¿é—®ç®¡ç†å‘˜é¡µé¢ ?!    (â•¯â€µâ–¡â€²)â•¯ï¸µâ”»â”â”»"
+                        });
+                        return self.display('home:index:index');
+
                     }
                 } else {
-                    //ÓÃ»§ÒÑ¾­µÇÂ¼
+
                     self.userInfo = userInfo;
                     self.assign('userInfo', userInfo);
                 }

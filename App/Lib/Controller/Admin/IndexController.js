@@ -1,7 +1,7 @@
-module.exports = Controller("Home/BaseController", function(){
+module.exports = Controller("Admin/BaseController", function () {
     "use strict";
     return {
-        indexAction: function(){
+        indexAction: function () {
             //render View/Home/index_index.ejs file
             this.display();
         }

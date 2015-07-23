@@ -9,11 +9,13 @@ module.exports = Controller(function () {
     'use strict';
     return {
         init: function (http) {
+
             this.super("init", http);
             //其他的通用逻辑
             var self = this;
+
             //console.log("http:  " + util.inspect(http));
-            console.log("action ->", http.action, "  controller ->", http.controller);
+            console.log("(╯‵□′)╯︵┻━┻  action ->", http.action, "  controller ->", http.controller, "  group ->", http.group);
 
             return self.session("userInfo").then(function (data) {
                 if (!isEmpty(data)) {
