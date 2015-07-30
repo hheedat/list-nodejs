@@ -18,7 +18,7 @@ var LoginBox = React.createClass({
 
             return $.ajax({
 
-                url: this.props.loginUrl,
+                url: this.props.urlLogin,
                 method: 'post',
                 dataType: 'json',
                 data: {
@@ -40,7 +40,7 @@ var LoginBox = React.createClass({
                     });
                     setTimeout(function(){
 
-                        window.location.href = this.props.redirectUrl;
+                        window.location.href = this.props.urlRedirect;
 
                     }.bind(this),100);
 
@@ -174,7 +174,7 @@ var RegisterBox = React.createClass({
 
             return $.ajax({
 
-                url: this.props.registerUrl,
+                url: this.props.urlRegister,
                 method: 'post',
                 dataType: 'json',
                 data: {
@@ -194,7 +194,7 @@ var RegisterBox = React.createClass({
                     });
                     setTimeout(function(){
 
-                        window.location.href = this.props.redirectUrl;
+                        window.location.href = this.props.urlRedirect;
 
                     }.bind(this),100);
 
@@ -344,8 +344,8 @@ var LoginRegisterBox = React.createClass({
     render: function () {
         return (
             <div>
-                <LoginBox loginUrl='/home/index/login' redirectUrl="/list"/>
-                <RegisterBox registerUrl='/home/index/register' redirectUrl="/list"/>
+                <LoginBox urlLogin='/home/index/login' urlRedirect="/list"/>
+                <RegisterBox urlRegister='/home/index/register' urlRedirect="/list"/>
             </div>
         );
     }

@@ -1,0 +1,20 @@
+@import "head";
+
+table{
+  border-collapse:collapse;
+  tr{
+    th,td{
+      padding:2px 7px;
+      border: 1px solid #e5e5e5;
+    }
+  }
+}
+
+.user-info,.list-info{
+  margin:15px;
+  float: left;
+}
+.visit-info{
+  float: left;
+  margin: 15px;
+}
