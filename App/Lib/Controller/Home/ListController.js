@@ -5,12 +5,10 @@ module.exports = Controller("Home/BaseController", function () {
     return {
         indexAction: function () {
             var self = this;
-            console.log("index action in list controller");
             return self.display();
         },
         addAction: function () {
             var self = this;
-            console.log("add action in list controller");
             if (self.isPost()) {
                 var title = self.post('title');
                 if (isEmpty(title)) return self.json({type: "err", msg: "title is empty"});
@@ -34,13 +32,12 @@ module.exports = Controller("Home/BaseController", function () {
                     }
                 }).catch(function (err) {
                     console.log({type: "err", "msg": err});
-                    return self.json({type: "err", "msg": err});
+                    return self.json({type: "err", "msg": "add fail"});
                 });
             }
         },
         deleteAction: function () {
             var self = this;
-            console.log("delete action in list controller");
             if (self.isPost()) {
                 var id = self.post("id");
                 if (isEmpty(id)) return self.json({type: "err", msg: "id is empty"});
@@ -57,13 +54,13 @@ module.exports = Controller("Home/BaseController", function () {
                         return self.json({type: "err", msg: "this id have no data"});
                     }
                 }).catch(function (err) {
-                    return self.json({type: "err", msg: err});
+                    console.log({type: "err", "msg": err});
+                    return self.json({type: "err", "msg": "this id have no data"});
                 });
             }
         },
         itemCompleteAction: function () {
             var self = this;
-            console.log("itemComplete action in list controller");
             if (self.isPost()) {
                 var id = self.post("id");
                 if (isEmpty(id)) return self.json({type: "err", msg: "id is empty"});
@@ -80,13 +77,13 @@ module.exports = Controller("Home/BaseController", function () {
                         return self.json({type: "err", msg: "this id have no data"});
                     }
                 }).catch(function (err) {
-                    return self.json({type: "err", msg: err});
+                    console.log({type: "err", "msg": err});
+                    return self.json({type: "err", "msg": "update fail"});
                 });
             }
         },
         itemUndoAction: function () {
             var self = this;
-            console.log("itemUndo action in list controller");
             if (self.isPost()) {
                 var id = self.post("id");
                 if (isEmpty(id)) return self.json({type: "err", msg: "id is empty"});
@@ -103,7 +100,8 @@ module.exports = Controller("Home/BaseController", function () {
                         return self.json({type: "err", msg: "this id have no data"});
                     }
                 }).catch(function (err) {
-                    return self.json({type: "err", msg: err});
+                    console.log({type: "err", "msg": err});
+                    return self.json({type: "err", "msg": "update fail"});
                 });
             }
         },
@@ -132,7 +130,8 @@ module.exports = Controller("Home/BaseController", function () {
                         return self.json({type: "err", msg: "this id have no data"});
                     }
                 }).catch(function (err) {
-                    return self.json({type: "err", msg: err});
+                    console.log({type: "err", "msg": err});
+                    return self.json({type: "err", "msg": "update fail"});
                 });
             }
         },
@@ -154,7 +153,8 @@ module.exports = Controller("Home/BaseController", function () {
                         return self.json({type: "err", msg: "this belong id have no data"});
                     }
                 }).catch(function (err) {
-                    return self.json({type: "err", msg: err});
+                    console.log({type: "err", "msg": err});
+                    return self.json({type: "err", "msg": "check fail"});
                 });
             }
         },
@@ -163,7 +163,6 @@ module.exports = Controller("Home/BaseController", function () {
         },
         checkDetailAction: function () {
             var self = this;
-            console.log("apple watch");
             if (self.isPost()) {
                 var belong = self.userInfo.id;
                 var id = self.post("id");
@@ -182,7 +181,8 @@ module.exports = Controller("Home/BaseController", function () {
                         return self.json({type: "err", msg: "this belong id have no data"});
                     }
                 }).catch(function (err) {
-                    return self.json({type: "err", msg: err});
+                    console.log({type: "err", "msg": err});
+                    return self.json({type: "err", "msg": "check detail fail"});
                 });
             }
         }
