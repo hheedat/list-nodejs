@@ -13,7 +13,7 @@ module.exports = Controller(function () {
             var self = this;
 
             //console.log("http:  " + util.inspect(http));
-            console.log("(╯‵□′)╯︵┻━┻  action ->", http.action, "  controller ->", http.controller, "  group ->", http.group);
+            //console.log("(╯‵□′)╯︵┻━┻  action ->", http.action, "  controller ->", http.controller, "  group ->", http.group);
 
             return self.session('userInfo').then(function (userInfo) {
 
@@ -35,7 +35,10 @@ module.exports = Controller(function () {
                 } else {
 
                     self.userInfo = userInfo;
-                    self.assign('userInfo', userInfo);
+                    self.assign({
+                        'islogin': true,
+                        'name': self.userInfo.name
+                    });
                 }
             });
         }

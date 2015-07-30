@@ -189,8 +189,7 @@ module.exports = Controller("Home/BaseController", function () {
             else {
                 return self.display('home:index:index');
             }
-        }
-        ,
+        },
         checkMailAction: function () {
             var self = this;
             if (self.isPost()) {

@@ -15,7 +15,7 @@ module.exports = Controller(function () {
             var self = this;
 
             //console.log("http:  " + util.inspect(http));
-            console.log("(╯‵□′)╯︵┻━┻  action ->", http.action, "  controller ->", http.controller, "  group ->", http.group);
+            //console.log("(╯‵□′)╯︵┻━┻  action ->", http.action, "  controller ->", http.controller, "  group ->", http.group);
 
             return self.session("userInfo").then(function (data) {
                 if (!isEmpty(data)) {
