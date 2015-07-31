@@ -16,25 +16,20 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `think_list`
+-- Table structure for table `think_statistics`
 --
 
-DROP TABLE IF EXISTS `think_list`;
+DROP TABLE IF EXISTS `think_statistics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `think_list` (
+CREATE TABLE `think_statistics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(500) DEFAULT NULL,
-  `content` varchar(1000) DEFAULT NULL,
+  `pv` int(11) DEFAULT NULL,
+  `req` int(11) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
-  `belong` int(11) NOT NULL,
-  `isuse` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `belong_idx` (`belong`),
-  CONSTRAINT `belong` FOREIGN KEY (`belong`) REFERENCES `think_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+  `datetime` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
