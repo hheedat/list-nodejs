@@ -1,357 +1,430 @@
-var LoginBox = React.createClass({displayName: "LoginBox",
-    checkFlag: false,
-    mail: '',
-    pwd: '',
-    getInitialState: function () {
-        return {
-            warning: {},
-            applyMsg: {
-                apply: ''
-            }
-        };
-    },
-    submit: function () {
+webpackJsonp([1],[
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
 
-        this.checkFlag = true;
+	'use strict';
+	var React = __webpack_require__(1);
+	var $ = __webpack_require__(157);
+	var moment = __webpack_require__(158);
 
-        if (this.isInputLegal()) {
+	var LoginBox = React.createClass({
+	    displayName: 'LoginBox',
 
-            return $.ajax({
+	    checkFlag: false,
+	    mail: '',
+	    pwd: '',
+	    getInitialState: function getInitialState() {
+	        return {
+	            warning: {},
+	            applyMsg: {
+	                apply: ''
+	            }
+	        };
+	    },
+	    submit: function submit() {
 
-                url: this.props.urlLogin,
-                method: 'post',
-                dataType: 'json',
-                data: {
-                    mail: this.mail,
-                    pwd: this.pwd
-                }
+	        this.checkFlag = true;
 
-            }).done(function (data) {
+	        if (this.isInputLegal()) {
 
-                if (data.errno == 0) {
+	            return $.ajax({
 
-                    this.setState({
-                        warning: {
-                            apply: ''
-                        },
-                        applyMsg: {
-                            apply: data.msg
-                        }
-                    });
-                    setTimeout(function(){
+	                url: this.props.urlLogin,
+	                method: 'post',
+	                dataType: 'json',
+	                data: {
+	                    mail: this.mail,
+	                    pwd: this.pwd
+	                }
 
-                        window.location.href = this.props.urlRedirect;
+	            }).done((function (data) {
 
-                    }.bind(this),100);
+	                if (data.errno == 0) {
 
-                } else {
-                    this.setState({
-                        warning: {
-                            apply: data.msg
-                        }
-                    });
-                }
+	                    this.setState({
+	                        warning: {
+	                            apply: ''
+	                        },
+	                        applyMsg: {
+	                            apply: data.msg
+	                        }
+	                    });
+	                    setTimeout((function () {
 
-            }.bind(this)).fail(function (xhr, status, err) {
+	                        window.location.href = this.props.urlRedirect;
+	                    }).bind(this), 100);
+	                } else {
+	                    this.setState({
+	                        warning: {
+	                            apply: data.msg
+	                        }
+	                    });
+	                }
+	            }).bind(this)).fail(function (xhr, status, err) {
 
-                console.error(this.props.url, status, err);
-                this.setState({
-                    warning: {
-                        apply: '出现了一些问题'
-                    }
-                });
+	                console.error(this.props.url, status, err);
+	                this.setState({
+	                    warning: {
+	                        apply: '出现了一些问题'
+	                    }
+	                });
+	            });
+	        }
+	    },
+	    isInputLegal: function isInputLegal() {
 
-            });
-        }
+	        if (!this.checkFlag) {
+	            return false;
+	        }
 
-    },
-    isInputLegal: function () {
+	        var mail = this.mail = this.refs.mail.getDOMNode().value.trim();
+	        var pwd = this.pwd = this.refs.pwd.getDOMNode().value.trim();
 
-        if (!this.checkFlag) {
-            return false;
-        }
+	        var regEmpty = /^\s*$/;
+	        var regMail = /^.+\@.+$/;
 
-        var mail = this.mail = this.refs.mail.getDOMNode().value.trim();
-        var pwd = this.pwd = this.refs.pwd.getDOMNode().value.trim();
+	        var flag = true;
 
-        var regEmpty = /^\s*$/;
-        var regMail = /^.+\@.+$/;
+	        //if (regEmpty.test(mail)) {
+	        //    this.setState({
+	        //        warning: {
+	        //            mail: '请输入您的邮箱'
+	        //        }
+	        //    });
+	        //    return false;
+	        //} else if (!regMail.test(mail)) {
+	        //    this.setState({
+	        //        warning: {
+	        //            mail: '您输入的不是一个合法的邮箱'
+	        //        }
+	        //    });
+	        //    return false;
+	        //} else {
+	        //    this.setState({
+	        //        warning: {
+	        //            mail: ''
+	        //        }
+	        //    });
+	        //}
 
-        var flag = true;
+	        //if (regEmpty.test(pwd)) {
+	        //    this.setState({
+	        //        warning: {
+	        //            pwd: '请输入您的密码'
+	        //        }
+	        //    });
+	        //    return false;
+	        //} else {
+	        //    this.setState({
+	        //        warning: {
+	        //            pwd: ''
+	        //        }
+	        //    });
+	        //}
 
-        //if (regEmpty.test(mail)) {
-        //    this.setState({
-        //        warning: {
-        //            mail: '请输入您的邮箱'
-        //        }
-        //    });
-        //    return false;
-        //} else if (!regMail.test(mail)) {
-        //    this.setState({
-        //        warning: {
-        //            mail: '您输入的不是一个合法的邮箱'
-        //        }
-        //    });
-        //    return false;
-        //} else {
-        //    this.setState({
-        //        warning: {
-        //            mail: ''
-        //        }
-        //    });
-        //}
+	        return flag;
+	    },
+	    componentDidMount: function componentDidMount() {},
+	    componentWillUnmount: function componentWillUnmount() {},
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { className: "main-box" },
+	            React.createElement(
+	                'h4',
+	                null,
+	                '登录'
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: "login-box" },
+	                React.createElement(
+	                    'div',
+	                    { className: "item" },
+	                    React.createElement(
+	                        'label',
+	                        { htmlFor: "mail" },
+	                        '邮箱 : '
+	                    ),
+	                    React.createElement('input', { ref: "mail", type: "text", id: "mail", onChange: this.isInputLegal, placeholder: "登录邮箱" }),
+	                    React.createElement(
+	                        'p',
+	                        { className: "warning" },
+	                        this.state.warning.mail
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: "item" },
+	                    React.createElement(
+	                        'label',
+	                        { htmlFor: "pwd" },
+	                        '密码 : '
+	                    ),
+	                    React.createElement('input', { ref: "pwd", type: "password", name: "pwd", onChange: this.isInputLegal, placeholder: "登录密码" }),
+	                    React.createElement(
+	                        'p',
+	                        { className: "warning" },
+	                        this.state.warning.pwd
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: "item" },
+	                    React.createElement(
+	                        'button',
+	                        { className: "btn", onClick: this.submit },
+	                        '登录'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        { className: "warning" },
+	                        this.state.warning.apply
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        { className: "msg" },
+	                        this.state.applyMsg.apply
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
 
-        //if (regEmpty.test(pwd)) {
-        //    this.setState({
-        //        warning: {
-        //            pwd: '请输入您的密码'
-        //        }
-        //    });
-        //    return false;
-        //} else {
-        //    this.setState({
-        //        warning: {
-        //            pwd: ''
-        //        }
-        //    });
-        //}
+	var RegisterBox = React.createClass({
+	    displayName: 'RegisterBox',
 
-        return flag;
+	    checkFlag: false,
+	    mail: '',
+	    pwd: '',
+	    username: '',
+	    getInitialState: function getInitialState() {
+	        return {
+	            warning: {},
+	            applyMsg: {}
+	        };
+	    },
+	    submit: function submit() {
 
-    },
-    componentDidMount: function () {
+	        this.checkFlag = true;
 
-    },
-    componentWillUnmount: function () {
+	        if (this.isInputLegal()) {
 
-    },
-    render: function () {
-        return (
-            React.createElement("div", {className: "main-box"}, 
-                React.createElement("h4", null, "登录"), 
+	            return $.ajax({
 
-                React.createElement("div", {className: "login-box"}, 
-                    React.createElement("div", {className: "item"}, 
-                        React.createElement("label", {htmlFor: "mail"}, "邮箱 : "), 
-                        React.createElement("input", {ref: "mail", type: "text", id: "mail", onChange: this.isInputLegal, placeholder: "登录邮箱"}), 
+	                url: this.props.urlRegister,
+	                method: 'post',
+	                dataType: 'json',
+	                data: {
+	                    mail: this.mail,
+	                    pwd: this.pwd,
+	                    name: this.username
+	                }
 
-                        React.createElement("p", {className: "warning"}, this.state.warning.mail)
-                    ), 
-                    React.createElement("div", {className: "item"}, 
-                        React.createElement("label", {htmlFor: "pwd"}, "密码 : "), 
-                        React.createElement("input", {ref: "pwd", type: "password", name: "pwd", onChange: this.isInputLegal, placeholder: "登录密码"}), 
+	            }).done((function (data) {
 
-                        React.createElement("p", {className: "warning"}, this.state.warning.pwd)
-                    ), 
-                    React.createElement("div", {className: "item"}, 
-                        React.createElement("button", {className: "btn", onClick: this.submit}, "登录"), 
-                        React.createElement("p", {className: "warning"}, this.state.warning.apply), 
+	                if (data.errno == 0) {
 
-                        React.createElement("p", {className: "msg"}, this.state.applyMsg.apply)
-                    )
-                )
-            )
-        );
-    }
-});
+	                    this.setState({
+	                        applyMsg: {
+	                            apply: data.msg
+	                        }
+	                    });
+	                    setTimeout((function () {
 
-var RegisterBox = React.createClass({displayName: "RegisterBox",
-    checkFlag: false,
-    mail: '',
-    pwd: '',
-    username: '',
-    getInitialState: function () {
-        return {
-            warning: {},
-            applyMsg: {}
-        };
-    },
-    submit: function () {
+	                        window.location.href = this.props.urlRedirect;
+	                    }).bind(this), 100);
+	                } else {
+	                    this.setState({
+	                        warning: {
+	                            apply: data.msg
+	                        }
+	                    });
+	                }
+	            }).bind(this)).fail(function (xhr, status, err) {
 
-        this.checkFlag = true;
+	                console.error(this.props.url, status, err);
+	                this.setState({
+	                    warning: {
+	                        apply: '出现了一些问题'
+	                    }
+	                });
+	            });
+	        }
+	    },
+	    isInputLegal: function isInputLegal() {
 
-        if (this.isInputLegal()) {
+	        if (!this.checkFlag) {
+	            return false;
+	        }
 
-            return $.ajax({
+	        var mail = this.mail = this.refs.mail.getDOMNode().value.trim();
+	        var pwd = this.pwd = this.refs.pwd.getDOMNode().value.trim();
+	        var username = this.username = this.refs.username.getDOMNode().value.trim();
 
-                url: this.props.urlRegister,
-                method: 'post',
-                dataType: 'json',
-                data: {
-                    mail: this.mail,
-                    pwd: this.pwd,
-                    name: this.username,
-                }
+	        var regEmpty = /^\s*$/;
+	        var regMail = /^.+\@.+$/;
 
-            }).done(function (data) {
+	        var flag = true;
 
-                if (data.errno == 0) {
+	        if (regEmpty.test(username)) {
+	            this.setState({
+	                warning: {
+	                    username: '请输入您的用户名'
+	                }
+	            });
+	            return false;
+	        } else {
+	            this.setState({
+	                warning: {
+	                    username: ''
+	                }
+	            });
+	        }
 
-                    this.setState({
-                        applyMsg: {
-                            apply: data.msg
-                        }
-                    });
-                    setTimeout(function(){
+	        //if (regEmpty.test(mail)) {
+	        //    this.setState({
+	        //        warning: {
+	        //            mail: '请输入您的邮箱'
+	        //        }
+	        //    });
+	        //    return false;
+	        //} else if (!regMail.test(mail)) {
+	        //    this.setState({
+	        //        warning: {
+	        //            mail: '您输入的不是一个合法的邮箱'
+	        //        }
+	        //    });
+	        //    return false;
+	        //} else {
+	        //    this.setState({
+	        //        warning: {
+	        //            mail: ''
+	        //        }
+	        //    });
+	        //}
+	        //
+	        //if (regEmpty.test(pwd)) {
+	        //    this.setState({
+	        //        warning: {
+	        //            pwd: '请输入您的密码'
+	        //        }
+	        //    });
+	        //    return false;
+	        //} else if (pwd.length < 6) {
+	        //    this.setState({
+	        //        warning: {
+	        //            pwd: '密码必须大于6位'
+	        //        }
+	        //    });
+	        //} else {
+	        //    this.setState({
+	        //        warning: {
+	        //            pwd: ''
+	        //        }
+	        //    });
+	        //}
 
-                        window.location.href = this.props.urlRedirect;
+	        return flag;
+	    },
+	    componentDidMount: function componentDidMount() {},
+	    componentWillUnmount: function componentWillUnmount() {},
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { className: "main-box" },
+	            React.createElement(
+	                'h4',
+	                null,
+	                '注册'
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: "register-box" },
+	                React.createElement(
+	                    'div',
+	                    { className: "item" },
+	                    React.createElement(
+	                        'label',
+	                        { htmlFor: "username" },
+	                        '用户名 : '
+	                    ),
+	                    React.createElement('input', { ref: "username", type: "text", id: "username", onChange: this.isInputLegal, placeholder: "用户名" }),
+	                    React.createElement(
+	                        'p',
+	                        { className: "warning" },
+	                        this.state.warning.username
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: "item" },
+	                    React.createElement(
+	                        'label',
+	                        { htmlFor: "mail" },
+	                        '邮箱 : '
+	                    ),
+	                    React.createElement('input', { ref: "mail", type: "text", id: "mail", onChange: this.isInputLegal, placeholder: "登录邮箱" }),
+	                    React.createElement(
+	                        'p',
+	                        { className: "warning" },
+	                        this.state.warning.mail
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: "item" },
+	                    React.createElement(
+	                        'label',
+	                        { htmlFor: "pwd" },
+	                        '密码 : '
+	                    ),
+	                    React.createElement('input', { ref: "pwd", type: "password", name: "pwd", onChange: this.isInputLegal, placeholder: "登录密码" }),
+	                    React.createElement(
+	                        'p',
+	                        { className: "warning" },
+	                        this.state.warning.pwd
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: "item" },
+	                    React.createElement(
+	                        'button',
+	                        { className: "btn", onClick: this.submit },
+	                        '注册'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        { className: "warning" },
+	                        this.state.warning.apply
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        { className: "msg" },
+	                        this.state.applyMsg.apply
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
 
-                    }.bind(this),100);
+	var LoginRegisterBox = React.createClass({
+	    displayName: 'LoginRegisterBox',
 
-                } else {
-                    this.setState({
-                        warning: {
-                            apply: data.msg
-                        }
-                    });
-                }
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(LoginBox, { urlLogin: '/home/index/login', urlRedirect: "/list" }),
+	            React.createElement(RegisterBox, { urlRegister: '/home/index/register', urlRedirect: "/list" })
+	        );
+	    }
+	});
 
-            }.bind(this)).fail(function (xhr, status, err) {
+	React.render(React.createElement(LoginRegisterBox, null), document.getElementById('wrapper'));
 
-                console.error(this.props.url, status, err);
-                this.setState({
-                    warning: {
-                        apply: '出现了一些问题'
-                    }
-                });
-
-            });
-        }
-
-    },
-    isInputLegal: function () {
-
-        if (!this.checkFlag) {
-            return false;
-        }
-
-        var mail = this.mail = this.refs.mail.getDOMNode().value.trim();
-        var pwd = this.pwd = this.refs.pwd.getDOMNode().value.trim();
-        var username = this.username = this.refs.username.getDOMNode().value.trim();
-
-        var regEmpty = /^\s*$/;
-        var regMail = /^.+\@.+$/;
-
-        var flag = true;
-
-        if (regEmpty.test(username)) {
-            this.setState({
-                warning: {
-                    username: '请输入您的用户名'
-                }
-            });
-            return false;
-        } else {
-            this.setState({
-                warning: {
-                    username: ''
-                }
-            });
-        }
-
-        //if (regEmpty.test(mail)) {
-        //    this.setState({
-        //        warning: {
-        //            mail: '请输入您的邮箱'
-        //        }
-        //    });
-        //    return false;
-        //} else if (!regMail.test(mail)) {
-        //    this.setState({
-        //        warning: {
-        //            mail: '您输入的不是一个合法的邮箱'
-        //        }
-        //    });
-        //    return false;
-        //} else {
-        //    this.setState({
-        //        warning: {
-        //            mail: ''
-        //        }
-        //    });
-        //}
-        //
-        //if (regEmpty.test(pwd)) {
-        //    this.setState({
-        //        warning: {
-        //            pwd: '请输入您的密码'
-        //        }
-        //    });
-        //    return false;
-        //} else if (pwd.length < 6) {
-        //    this.setState({
-        //        warning: {
-        //            pwd: '密码必须大于6位'
-        //        }
-        //    });
-        //} else {
-        //    this.setState({
-        //        warning: {
-        //            pwd: ''
-        //        }
-        //    });
-        //}
-
-        return flag;
-
-    },
-    componentDidMount: function () {
-
-    },
-    componentWillUnmount: function () {
-
-    },
-    render: function () {
-        return (
-            React.createElement("div", {className: "main-box"}, 
-                React.createElement("h4", null, "注册"), 
-
-                React.createElement("div", {className: "register-box"}, 
-                    React.createElement("div", {className: "item"}, 
-                        React.createElement("label", {htmlFor: "username"}, "用户名 : "), 
-                        React.createElement("input", {ref: "username", type: "text", id: "username", onChange: this.isInputLegal, placeholder: "用户名"}), 
-
-                        React.createElement("p", {className: "warning"}, this.state.warning.username)
-                    ), 
-
-                    React.createElement("div", {className: "item"}, 
-                        React.createElement("label", {htmlFor: "mail"}, "邮箱 : "), 
-                        React.createElement("input", {ref: "mail", type: "text", id: "mail", onChange: this.isInputLegal, placeholder: "登录邮箱"}), 
-
-                        React.createElement("p", {className: "warning"}, this.state.warning.mail)
-                    ), 
-
-                    React.createElement("div", {className: "item"}, 
-                        React.createElement("label", {htmlFor: "pwd"}, "密码 : "), 
-                        React.createElement("input", {ref: "pwd", type: "password", name: "pwd", onChange: this.isInputLegal, placeholder: "登录密码"}), 
-
-                        React.createElement("p", {className: "warning"}, this.state.warning.pwd)
-                    ), 
-
-                    React.createElement("div", {className: "item"}, 
-                        React.createElement("button", {className: "btn", onClick: this.submit}, "注册"), 
-                        React.createElement("p", {className: "warning"}, this.state.warning.apply), 
-
-                        React.createElement("p", {className: "msg"}, this.state.applyMsg.apply)
-                    )
-                )
-            )
-        );
-    }
-});
-
-var LoginRegisterBox = React.createClass({displayName: "LoginRegisterBox",
-    render: function () {
-        return (
-            React.createElement("div", null, 
-                React.createElement(LoginBox, {urlLogin: "/home/index/login", urlRedirect: "/list"}), 
-                React.createElement(RegisterBox, {urlRegister: "/home/index/register", urlRedirect: "/list"})
-            )
-        );
-    }
-});
-
-React.render(
-    React.createElement(LoginRegisterBox, null),
-    document.getElementById('wrapper')
-);
+/***/ }
+]);

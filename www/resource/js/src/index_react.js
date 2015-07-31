@@ -1,3 +1,8 @@
+'use strict';
+var React = require('react');
+var $ = require("jquery");
+var moment = require("moment");
+
 var LoginBox = React.createClass({
     checkFlag: false,
     mail: '',

@@ -1,4 +1,9 @@
-var Analytics = React.createClass({displayName: "Analytics",
+'use strict';
+var React = require("react");
+var $ = require("jquery");
+var moment = require("moment");
+
+var Analytics = React.createClass({
     loadTimer: null,
     getInitialState: function () {
         return {
@@ -34,37 +39,37 @@ var Analytics = React.createClass({displayName: "Analytics",
         if (this.state.info.length) {
             items = this.state.info.map(function (item) {
                 return (
-                    React.createElement("tr", {key: item.id}, 
-                        React.createElement("td", null, moment(item.datetime).format('YYYY-MM-DD')), 
-                        React.createElement("td", null, item.pv), 
-                        React.createElement("td", null, item.req)
-                    )
+                    <tr key={item.id}>
+                        <td>{moment(item.datetime).format('YYYY-MM-DD')}</td>
+                        <td>{item.pv}</td>
+                        <td>{item.req}</td>
+                    </tr>
                 )
             });
         } else {
             items = (
-                React.createElement("tr", null, 
-                    React.createElement("td", {colSpan: "3"}, "loading...")
-                )
+                <tr>
+                    <td colSpan="3">loading...</td>
+                </tr>
             )
         }
 
         return (
-            React.createElement("table", {className: "visit-info"}, 
-                React.createElement("tbody", null, 
-                React.createElement("tr", null, 
-                    React.createElement("th", null, "Time"), 
-                    React.createElement("th", null, "PV"), 
-                    React.createElement("th", null, "REQ")
-                ), 
-                items
-                )
-            )
+            <table className="visit-info">
+                <tbody>
+                <tr>
+                    <th>Time</th>
+                    <th>PV</th>
+                    <th>REQ</th>
+                </tr>
+                {items}
+                </tbody>
+            </table>
         );
     }
 });
 
-var UserInfo = React.createClass({displayName: "UserInfo",
+var UserInfo = React.createClass({
     loadTimer: null,
     getInitialState: function () {
         return {
@@ -97,21 +102,21 @@ var UserInfo = React.createClass({displayName: "UserInfo",
     },
     render: function () {
         return (
-            React.createElement("table", {className: "user-info"}, 
-                React.createElement("tbody", null, 
-                React.createElement("tr", null, 
-                    React.createElement("th", null, "User Num")
-                ), 
-                React.createElement("tr", null, 
-                    React.createElement("td", null, this.state.count)
-                )
-                )
-            )
+            <table className="user-info">
+                <tbody>
+                <tr>
+                    <th>User Num</th>
+                </tr>
+                <tr>
+                    <td>{this.state.count}</td>
+                </tr>
+                </tbody>
+            </table>
         );
     }
 });
 
-var ListInfo = React.createClass({displayName: "ListInfo",
+var ListInfo = React.createClass({
     loadTimer: null,
     getInitialState: function () {
         return {
@@ -144,33 +149,33 @@ var ListInfo = React.createClass({displayName: "ListInfo",
     },
     render: function () {
         return (
-            React.createElement("table", {className: "list-info"}, 
-                React.createElement("tbody", null, 
-                React.createElement("tr", null, 
-                    React.createElement("th", null, "List Num")
-                ), 
-                React.createElement("tr", null, 
-                    React.createElement("td", null, this.state.count)
-                )
-                )
-            )
+            <table className="list-info">
+                <tbody>
+                <tr>
+                    <th>List Num</th>
+                </tr>
+                <tr>
+                    <td>{this.state.count}</td>
+                </tr>
+                </tbody>
+            </table>
         );
     }
 });
 
-var AdminLauncher = React.createClass({displayName: "AdminLauncher",
+var AdminLauncher = React.createClass({
     render: function () {
         return (
-            React.createElement("div", {className: "cf"}, 
-                React.createElement(UserInfo, {urlUserInfo: "/admin/index/getUsersInfo", pollInterval: 1000*60}), 
-                React.createElement(ListInfo, {urlListInfo: "/admin/index/getListInfo", pollInterval: 1000*60}), 
-                React.createElement(Analytics, {urlInfo: "/admin/index/getInfo", pollInterval: 1000*60})
-            )
+            <div className="cf">
+                <UserInfo urlUserInfo='/admin/index/getUsersInfo' pollInterval={1000*60}/>
+                <ListInfo urlListInfo='/admin/index/getListInfo' pollInterval={1000*60}/>
+                <Analytics urlInfo='/admin/index/getInfo' pollInterval={1000*60}/>
+            </div>
         );
     }
 });
 
 React.render(
-    React.createElement(AdminLauncher, null),
+    <AdminLauncher/>,
     document.getElementById('wrapper')
 );

@@ -1,3 +1,6 @@
+var React = require('react');
+var moment = require("moment");
+
 var LastUpdateTime = React.createClass({
     timer: null,
     lastUpdateTime: null,
@@ -32,7 +35,4 @@ var LastUpdateTime = React.createClass({
     }
 });
 
-React.render(
-    <LastUpdateTime updateInterval={1000*60}/>,
-    document.getElementById('last-update')
-);
+module.exports = LastUpdateTime;

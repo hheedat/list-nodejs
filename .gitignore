@@ -5,7 +5,7 @@ output/
 output.tar.gz
 sftp-config.json
 .idea/
-App/Conf/
+App/Conf/config.js
 *.css.map
 .module-cache
 .DS_store

@@ -1,3 +1,10 @@
+'use strict';
+var React = require('react');
+var $ = require("jquery");
+var moment = require("moment");
+var Dispatcher = require('./dispacher');
+var LastUpdateTime = require('./up_time_react');
+
 dispacher.list = new Dispatcher();
 
 var ListShow = React.createClass({
@@ -406,4 +413,9 @@ React.initializeTouchEvents(true);
 React.render(
     <List/>,
     document.getElementById('list-con')
+);
+
+React.render(
+    <LastUpdateTime updateInterval={1000*60}/>,
+    document.getElementById('last-update')
 );

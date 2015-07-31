@@ -1,19 +1,33 @@
 {
-  "name": "project-name",
-  "description": "project created by thinkjs",
+  "name": "list",
+  "description": "project created by thinkjs and react",
   "version": "0.1.0",
-  "author": {},
+  "author": "zhaoyuxiang",
   "dependencies": {
+    "moment": "*",
+    "react": "^0.13.3",
     "thinkjs": "*",
-    "moment":"*"
+    "jquery": "^2.1.4"
   },
   "keywords": [],
   "repository": {
     "type": "git",
     "url": ""
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
+  },
   "engines": {
     "node": ">=0.10.0"
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "babel-core": "^5.8.19",
+    "babel-loader": "^5.3.2",
+    "webpack-dev-server": "^1.10.1",
+    "webpack": "^1.10.5"
+  },
+  "license": "ISC"
 }
