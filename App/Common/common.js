@@ -4,14 +4,12 @@ var moment = require("moment");
 global.commonInfo = (function () {
     var pv;
     var req;
+    var pv_before;
+    var req_before;
 
-    //var SAVE_INFO_TIMER = 1000 * 60 * 60;
-    var SAVE_INFO_TIMER = 1000 * 15;
-
-    var console = {
-        log: function () {
-        }
-    }
+    var SAVE_INFO_TIMER = 1000 * 60 * 10;
+    var dateFlag;
+    //var SAVE_INFO_TIMER = 1000 * 15;
 
     function startCount() {
 
@@ -21,11 +19,11 @@ global.commonInfo = (function () {
             datetime: dateTime
         }).find().then(function (data) {
             if (!isEmpty(data)) {
-                pv = data.pv;
-                req = data.req;
+                pv_before = pv = data.pv;
+                req_before = req = data.req;
             } else {
-                pv = 0;
-                req = 0;
+                pv_before = pv = 0;
+                req_before = req = 0;
             }
         }).catch(function (err) {
 
@@ -39,6 +37,19 @@ global.commonInfo = (function () {
 
         var time = moment().format("YYYY-MM-DD HH:mm:ss");
         var dateTime = moment().format('YYYY-MM-DD');
+
+        if (dateFlag !== dateTime) {
+
+            dateFlag = dateTime;
+            pv -= pv_before;
+            req -= req_before;
+
+        } else {
+
+            pv_before = pv;
+            req_before = req;
+
+        }
 
         return D("Statistics").where({
             datetime: dateTime

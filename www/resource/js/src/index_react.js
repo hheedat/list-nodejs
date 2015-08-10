@@ -84,42 +84,42 @@ var LoginBox = React.createClass({
 
         var flag = true;
 
-        //if (regEmpty.test(mail)) {
-        //    this.setState({
-        //        warning: {
-        //            mail: '请输入您的邮箱'
-        //        }
-        //    });
-        //    return false;
-        //} else if (!regMail.test(mail)) {
-        //    this.setState({
-        //        warning: {
-        //            mail: '您输入的不是一个合法的邮箱'
-        //        }
-        //    });
-        //    return false;
-        //} else {
-        //    this.setState({
-        //        warning: {
-        //            mail: ''
-        //        }
-        //    });
-        //}
+        if (regEmpty.test(mail)) {
+            this.setState({
+                warning: {
+                    mail: '请输入您的邮箱'
+                }
+            });
+            return false;
+        } else if (!regMail.test(mail)) {
+            this.setState({
+                warning: {
+                    mail: '您输入的不是一个合法的邮箱'
+                }
+            });
+            return false;
+        } else {
+            this.setState({
+                warning: {
+                    mail: ''
+                }
+            });
+        }
 
-        //if (regEmpty.test(pwd)) {
-        //    this.setState({
-        //        warning: {
-        //            pwd: '请输入您的密码'
-        //        }
-        //    });
-        //    return false;
-        //} else {
-        //    this.setState({
-        //        warning: {
-        //            pwd: ''
-        //        }
-        //    });
-        //}
+        if (regEmpty.test(pwd)) {
+            this.setState({
+                warning: {
+                    pwd: '请输入您的密码'
+                }
+            });
+            return false;
+        } else {
+            this.setState({
+                warning: {
+                    pwd: ''
+                }
+            });
+        }
 
         return flag;
 
@@ -254,48 +254,48 @@ var RegisterBox = React.createClass({
             });
         }
 
-        //if (regEmpty.test(mail)) {
-        //    this.setState({
-        //        warning: {
-        //            mail: '请输入您的邮箱'
-        //        }
-        //    });
-        //    return false;
-        //} else if (!regMail.test(mail)) {
-        //    this.setState({
-        //        warning: {
-        //            mail: '您输入的不是一个合法的邮箱'
-        //        }
-        //    });
-        //    return false;
-        //} else {
-        //    this.setState({
-        //        warning: {
-        //            mail: ''
-        //        }
-        //    });
-        //}
-        //
-        //if (regEmpty.test(pwd)) {
-        //    this.setState({
-        //        warning: {
-        //            pwd: '请输入您的密码'
-        //        }
-        //    });
-        //    return false;
-        //} else if (pwd.length < 6) {
-        //    this.setState({
-        //        warning: {
-        //            pwd: '密码必须大于6位'
-        //        }
-        //    });
-        //} else {
-        //    this.setState({
-        //        warning: {
-        //            pwd: ''
-        //        }
-        //    });
-        //}
+        if (regEmpty.test(mail)) {
+            this.setState({
+                warning: {
+                    mail: '请输入您的邮箱'
+                }
+            });
+            return false;
+        } else if (!regMail.test(mail)) {
+            this.setState({
+                warning: {
+                    mail: '您输入的不是一个合法的邮箱'
+                }
+            });
+            return false;
+        } else {
+            this.setState({
+                warning: {
+                    mail: ''
+                }
+            });
+        }
+
+        if (regEmpty.test(pwd)) {
+            this.setState({
+                warning: {
+                    pwd: '请输入您的密码'
+                }
+            });
+            return false;
+        } else if (pwd.length < 6) {
+            this.setState({
+                warning: {
+                    pwd: '密码必须大于6位'
+                }
+            });
+        } else {
+            this.setState({
+                warning: {
+                    pwd: ''
+                }
+            });
+        }
 
         return flag;
 

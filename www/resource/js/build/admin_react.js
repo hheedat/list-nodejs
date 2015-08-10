@@ -234,9 +234,9 @@ webpackJsonp([0],[
 	        return React.createElement(
 	            "div",
 	            { className: "cf" },
-	            React.createElement(UserInfo, { urlUserInfo: '/admin/index/getUsersInfo', pollInterval: 1000 * 60 }),
-	            React.createElement(ListInfo, { urlListInfo: '/admin/index/getListInfo', pollInterval: 1000 * 60 }),
-	            React.createElement(Analytics, { urlInfo: '/admin/index/getInfo', pollInterval: 1000 * 60 })
+	            React.createElement(UserInfo, { urlUserInfo: "/admin/index/getUsersInfo", pollInterval: 1000 * 60 }),
+	            React.createElement(ListInfo, { urlListInfo: "/admin/index/getListInfo", pollInterval: 1000 * 60 }),
+	            React.createElement(Analytics, { urlInfo: "/admin/index/getInfo", pollInterval: 1000 * 60 })
 	        );
 	    }
 	});

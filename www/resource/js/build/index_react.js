@@ -85,42 +85,42 @@ webpackJsonp([1],[
 
 	        var flag = true;
 
-	        //if (regEmpty.test(mail)) {
-	        //    this.setState({
-	        //        warning: {
-	        //            mail: '请输入您的邮箱'
-	        //        }
-	        //    });
-	        //    return false;
-	        //} else if (!regMail.test(mail)) {
-	        //    this.setState({
-	        //        warning: {
-	        //            mail: '您输入的不是一个合法的邮箱'
-	        //        }
-	        //    });
-	        //    return false;
-	        //} else {
-	        //    this.setState({
-	        //        warning: {
-	        //            mail: ''
-	        //        }
-	        //    });
-	        //}
+	        if (regEmpty.test(mail)) {
+	            this.setState({
+	                warning: {
+	                    mail: '请输入您的邮箱'
+	                }
+	            });
+	            return false;
+	        } else if (!regMail.test(mail)) {
+	            this.setState({
+	                warning: {
+	                    mail: '您输入的不是一个合法的邮箱'
+	                }
+	            });
+	            return false;
+	        } else {
+	            this.setState({
+	                warning: {
+	                    mail: ''
+	                }
+	            });
+	        }
 
-	        //if (regEmpty.test(pwd)) {
-	        //    this.setState({
-	        //        warning: {
-	        //            pwd: '请输入您的密码'
-	        //        }
-	        //    });
-	        //    return false;
-	        //} else {
-	        //    this.setState({
-	        //        warning: {
-	        //            pwd: ''
-	        //        }
-	        //    });
-	        //}
+	        if (regEmpty.test(pwd)) {
+	            this.setState({
+	                warning: {
+	                    pwd: '请输入您的密码'
+	                }
+	            });
+	            return false;
+	        } else {
+	            this.setState({
+	                warning: {
+	                    pwd: ''
+	                }
+	            });
+	        }
 
 	        return flag;
 	    },
@@ -129,7 +129,7 @@ webpackJsonp([1],[
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { className: "main-box" },
+	            { className: 'main-box' },
 	            React.createElement(
 	                'h4',
 	                null,
@@ -137,53 +137,53 @@ webpackJsonp([1],[
 	            ),
 	            React.createElement(
 	                'div',
-	                { className: "login-box" },
+	                { className: 'login-box' },
 	                React.createElement(
 	                    'div',
-	                    { className: "item" },
+	                    { className: 'item' },
 	                    React.createElement(
 	                        'label',
-	                        { htmlFor: "mail" },
+	                        { htmlFor: 'mail' },
 	                        '邮箱 : '
 	                    ),
-	                    React.createElement('input', { ref: "mail", type: "text", id: "mail", onChange: this.isInputLegal, placeholder: "登录邮箱" }),
+	                    React.createElement('input', { ref: 'mail', type: 'text', id: 'mail', onChange: this.isInputLegal, placeholder: '登录邮箱' }),
 	                    React.createElement(
 	                        'p',
-	                        { className: "warning" },
+	                        { className: 'warning' },
 	                        this.state.warning.mail
 	                    )
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: "item" },
+	                    { className: 'item' },
 	                    React.createElement(
 	                        'label',
-	                        { htmlFor: "pwd" },
+	                        { htmlFor: 'pwd' },
 	                        '密码 : '
 	                    ),
-	                    React.createElement('input', { ref: "pwd", type: "password", name: "pwd", onChange: this.isInputLegal, placeholder: "登录密码" }),
+	                    React.createElement('input', { ref: 'pwd', type: 'password', name: 'pwd', onChange: this.isInputLegal, placeholder: '登录密码' }),
 	                    React.createElement(
 	                        'p',
-	                        { className: "warning" },
+	                        { className: 'warning' },
 	                        this.state.warning.pwd
 	                    )
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: "item" },
+	                    { className: 'item' },
 	                    React.createElement(
 	                        'button',
-	                        { className: "btn", onClick: this.submit },
+	                        { className: 'btn', onClick: this.submit },
 	                        '登录'
 	                    ),
 	                    React.createElement(
 	                        'p',
-	                        { className: "warning" },
+	                        { className: 'warning' },
 	                        this.state.warning.apply
 	                    ),
 	                    React.createElement(
 	                        'p',
-	                        { className: "msg" },
+	                        { className: 'msg' },
 	                        this.state.applyMsg.apply
 	                    )
 	                )
@@ -283,48 +283,48 @@ webpackJsonp([1],[
 	            });
 	        }
 
-	        //if (regEmpty.test(mail)) {
-	        //    this.setState({
-	        //        warning: {
-	        //            mail: '请输入您的邮箱'
-	        //        }
-	        //    });
-	        //    return false;
-	        //} else if (!regMail.test(mail)) {
-	        //    this.setState({
-	        //        warning: {
-	        //            mail: '您输入的不是一个合法的邮箱'
-	        //        }
-	        //    });
-	        //    return false;
-	        //} else {
-	        //    this.setState({
-	        //        warning: {
-	        //            mail: ''
-	        //        }
-	        //    });
-	        //}
-	        //
-	        //if (regEmpty.test(pwd)) {
-	        //    this.setState({
-	        //        warning: {
-	        //            pwd: '请输入您的密码'
-	        //        }
-	        //    });
-	        //    return false;
-	        //} else if (pwd.length < 6) {
-	        //    this.setState({
-	        //        warning: {
-	        //            pwd: '密码必须大于6位'
-	        //        }
-	        //    });
-	        //} else {
-	        //    this.setState({
-	        //        warning: {
-	        //            pwd: ''
-	        //        }
-	        //    });
-	        //}
+	        if (regEmpty.test(mail)) {
+	            this.setState({
+	                warning: {
+	                    mail: '请输入您的邮箱'
+	                }
+	            });
+	            return false;
+	        } else if (!regMail.test(mail)) {
+	            this.setState({
+	                warning: {
+	                    mail: '您输入的不是一个合法的邮箱'
+	                }
+	            });
+	            return false;
+	        } else {
+	            this.setState({
+	                warning: {
+	                    mail: ''
+	                }
+	            });
+	        }
+
+	        if (regEmpty.test(pwd)) {
+	            this.setState({
+	                warning: {
+	                    pwd: '请输入您的密码'
+	                }
+	            });
+	            return false;
+	        } else if (pwd.length < 6) {
+	            this.setState({
+	                warning: {
+	                    pwd: '密码必须大于6位'
+	                }
+	            });
+	        } else {
+	            this.setState({
+	                warning: {
+	                    pwd: ''
+	                }
+	            });
+	        }
 
 	        return flag;
 	    },
@@ -333,7 +333,7 @@ webpackJsonp([1],[
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { className: "main-box" },
+	            { className: 'main-box' },
 	            React.createElement(
 	                'h4',
 	                null,
@@ -341,68 +341,68 @@ webpackJsonp([1],[
 	            ),
 	            React.createElement(
 	                'div',
-	                { className: "register-box" },
+	                { className: 'register-box' },
 	                React.createElement(
 	                    'div',
-	                    { className: "item" },
+	                    { className: 'item' },
 	                    React.createElement(
 	                        'label',
-	                        { htmlFor: "username" },
+	                        { htmlFor: 'username' },
 	                        '用户名 : '
 	                    ),
-	                    React.createElement('input', { ref: "username", type: "text", id: "username", onChange: this.isInputLegal, placeholder: "用户名" }),
+	                    React.createElement('input', { ref: 'username', type: 'text', id: 'username', onChange: this.isInputLegal, placeholder: '用户名' }),
 	                    React.createElement(
 	                        'p',
-	                        { className: "warning" },
+	                        { className: 'warning' },
 	                        this.state.warning.username
 	                    )
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: "item" },
+	                    { className: 'item' },
 	                    React.createElement(
 	                        'label',
-	                        { htmlFor: "mail" },
+	                        { htmlFor: 'mail' },
 	                        '邮箱 : '
 	                    ),
-	                    React.createElement('input', { ref: "mail", type: "text", id: "mail", onChange: this.isInputLegal, placeholder: "登录邮箱" }),
+	                    React.createElement('input', { ref: 'mail', type: 'text', id: 'mail', onChange: this.isInputLegal, placeholder: '登录邮箱' }),
 	                    React.createElement(
 	                        'p',
-	                        { className: "warning" },
+	                        { className: 'warning' },
 	                        this.state.warning.mail
 	                    )
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: "item" },
+	                    { className: 'item' },
 	                    React.createElement(
 	                        'label',
-	                        { htmlFor: "pwd" },
+	                        { htmlFor: 'pwd' },
 	                        '密码 : '
 	                    ),
-	                    React.createElement('input', { ref: "pwd", type: "password", name: "pwd", onChange: this.isInputLegal, placeholder: "登录密码" }),
+	                    React.createElement('input', { ref: 'pwd', type: 'password', name: 'pwd', onChange: this.isInputLegal, placeholder: '登录密码' }),
 	                    React.createElement(
 	                        'p',
-	                        { className: "warning" },
+	                        { className: 'warning' },
 	                        this.state.warning.pwd
 	                    )
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: "item" },
+	                    { className: 'item' },
 	                    React.createElement(
 	                        'button',
-	                        { className: "btn", onClick: this.submit },
+	                        { className: 'btn', onClick: this.submit },
 	                        '注册'
 	                    ),
 	                    React.createElement(
 	                        'p',
-	                        { className: "warning" },
+	                        { className: 'warning' },
 	                        this.state.warning.apply
 	                    ),
 	                    React.createElement(
 	                        'p',
-	                        { className: "msg" },
+	                        { className: 'msg' },
 	                        this.state.applyMsg.apply
 	                    )
 	                )
@@ -418,8 +418,8 @@ webpackJsonp([1],[
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(LoginBox, { urlLogin: '/home/index/login', urlRedirect: "/list" }),
-	            React.createElement(RegisterBox, { urlRegister: '/home/index/register', urlRedirect: "/list" })
+	            React.createElement(LoginBox, { urlLogin: '/home/index/login', urlRedirect: '/list' }),
+	            React.createElement(RegisterBox, { urlRegister: '/home/index/register', urlRedirect: '/list' })
 	        );
 	    }
 	});

@@ -60,14 +60,14 @@ webpackJsonp([2],{
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { className: "list-wrapper" },
+	            { className: 'list-wrapper' },
 	            React.createElement(
 	                'div',
-	                { className: "list-head" },
+	                { className: 'list-head' },
 	                React.createElement('span', null)
 	            ),
-	            React.createElement(ListCon, { data: this.state.data, urlItemComplete: "/home/list/itemComplete",
-	                urlItemUndo: "/home/list/itemUndo" })
+	            React.createElement(ListCon, { data: this.state.data, urlItemComplete: '/home/list/itemComplete',
+	                urlItemUndo: '/home/list/itemUndo' })
 	        );
 	    }
 	});
@@ -107,24 +107,24 @@ webpackJsonp([2],{
 	        var listItem = this.props.data.map(function (item) {
 	            return React.createElement(
 	                'div',
-	                { className: "list-item cf", key: item.id, onClick: self.checkItemDetail.bind(self, item.id) },
-	                React.createElement('input', { type: "checkbox", 'data-id': item.id, onClick: self.changeItemStatus,
+	                { className: 'list-item cf', key: item.id, onClick: self.checkItemDetail.bind(self, item.id) },
+	                React.createElement('input', { type: 'checkbox', 'data-id': item.id, onClick: self.changeItemStatus,
 	                    defaultChecked: item.status ? false : true }),
 	                React.createElement(
 	                    'span',
-	                    { className: "list-title" },
+	                    { className: 'list-title' },
 	                    item.title
 	                ),
 	                React.createElement(
 	                    'span',
-	                    { className: "list-time" },
+	                    { className: 'list-time' },
 	                    moment().date() != moment(item.time).date() ? moment().format("l") : moment(item.time).startOf('second').fromNow()
 	                )
 	            );
 	        });
 	        return React.createElement(
 	            'div',
-	            { className: "list-data" },
+	            { className: 'list-data' },
 	            listItem
 	        );
 	    }
@@ -182,12 +182,12 @@ webpackJsonp([2],{
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { className: "list-add cf" },
-	            React.createElement('input', { type: "text", className: "input-text", ref: "title", onKeyDown: this.handleKeyDown,
-	                placeholder: "add new list ..." }),
+	            { className: 'list-add cf' },
+	            React.createElement('input', { type: 'text', className: 'input-text', ref: 'title', onKeyDown: this.handleKeyDown,
+	                placeholder: 'add new list ...' }),
 	            React.createElement(
 	                'button',
-	                { ref: "addBtn", className: "add", onClick: this.addList },
+	                { ref: 'addBtn', className: 'add', onClick: this.addList },
 	                'add'
 	            )
 	        );
@@ -313,43 +313,43 @@ webpackJsonp([2],{
 	        if (this.state.data) {
 	            detail = React.createElement(
 	                'div',
-	                { className: "list-detail-mask", ref: "mask", onClick: this.closeDetail },
+	                { className: 'list-detail-mask', ref: 'mask', onClick: this.closeDetail },
 	                React.createElement(
 	                    'div',
-	                    { className: "list-detail-wrapper", ref: "wrapper" },
+	                    { className: 'list-detail-wrapper', ref: 'wrapper' },
 	                    React.createElement(
 	                        'div',
-	                        { className: "list-detail" },
+	                        { className: 'list-detail' },
 	                        React.createElement(
 	                            'div',
-	                            { className: "list-control cf" },
+	                            { className: 'list-control cf' },
 	                            React.createElement(
 	                                'button',
-	                                { className: "update-btn", onClick: this.updateData },
+	                                { className: 'update-btn', onClick: this.updateData },
 	                                'update'
 	                            ),
 	                            React.createElement(
 	                                'button',
-	                                { className: "close-btn", onClick: this.closeDetail },
+	                                { className: 'close-btn', onClick: this.closeDetail },
 	                                'close'
 	                            )
 	                        ),
 	                        React.createElement(
 	                            'div',
-	                            { className: "list-detail-data" },
-	                            React.createElement('textarea', { className: "my-textarea", ref: "title", defaultValue: this.state.data.title }),
-	                            React.createElement('input', { type: "text", className: "input-text", ref: "time", disabled: "disabled",
+	                            { className: 'list-detail-data' },
+	                            React.createElement('textarea', { className: 'my-textarea', ref: 'title', defaultValue: this.state.data.title }),
+	                            React.createElement('input', { type: 'text', className: 'input-text', ref: 'time', disabled: 'disabled',
 	                                value: moment(this.state.data.time).format("YYYY-MM-DD HH:mm:ss") }),
 	                            React.createElement(
 	                                'div',
-	                                { className: "content" },
-	                                React.createElement('textarea', { className: "my-textarea", ref: "content",
+	                                { className: 'content' },
+	                                React.createElement('textarea', { className: 'my-textarea', ref: 'content',
 	                                    defaultValue: this.state.data.content })
 	                            )
 	                        ),
 	                        React.createElement(
 	                            'a',
-	                            { className: "del-btn", onClick: this.deleteData },
+	                            { className: 'del-btn', onClick: this.deleteData },
 	                            'delete'
 	                        )
 	                    )
@@ -381,18 +381,18 @@ webpackJsonp([2],{
 	    render: function render() {
 	        var inner = this.isShow ? React.createElement(
 	            'div',
-	            { id: "list-complete-show" },
-	            React.createElement(ListShow, { url: "/home/list/checkComplete", pollInterval: 1000 * 60 })
+	            { id: 'list-complete-show' },
+	            React.createElement(ListShow, { url: '/home/list/checkComplete', pollInterval: 1000 * 60 })
 	        ) : null;
 	        return React.createElement(
 	            'div',
-	            { id: "list-complete" },
+	            { id: 'list-complete' },
 	            React.createElement(
 	                'div',
-	                { className: "show-complete" },
+	                { className: 'show-complete' },
 	                React.createElement(
 	                    'a',
-	                    { className: "show-complete-toggle", onClick: this.toggleShow, href: "javascript:void(0);" },
+	                    { className: 'show-complete-toggle', onClick: this.toggleShow, href: 'javascript:void(0);' },
 	                    this.isShow ? "HIDE COMPLETED ITEMS" : "SHOW COMPLETED ITEMS"
 	                )
 	            ),
@@ -423,8 +423,8 @@ webpackJsonp([2],{
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { className: "loading-bar" },
-	            React.createElement('div', { ref: "loadingBar", className: this.state.className })
+	            { className: 'loading-bar' },
+	            React.createElement('div', { ref: 'loadingBar', className: this.state.className })
 	        );
 	    }
 	});
@@ -435,12 +435,12 @@ webpackJsonp([2],{
 	    render: function render() {
 	        return React.createElement(
 	            'div',
-	            { className: "list" },
+	            { className: 'list' },
 	            React.createElement(LoadingBar, null),
-	            React.createElement(ListAdd, { url: "/home/list/add" }),
-	            React.createElement(ListShow, { url: "/home/list/check", pollInterval: 1000 * 60 }),
-	            React.createElement(ListDetail, { urlCheck: "/home/list/checkDetail", urlUpdate: "/home/list/update",
-	                urlDelete: "/home/list/delete" }),
+	            React.createElement(ListAdd, { url: '/home/list/add' }),
+	            React.createElement(ListShow, { url: '/home/list/check', pollInterval: 1000 * 60 }),
+	            React.createElement(ListDetail, { urlCheck: '/home/list/checkDetail', urlUpdate: '/home/list/update',
+	                urlDelete: '/home/list/delete' }),
 	            React.createElement(ListShowComplete, null)
 	        );
 	    }
