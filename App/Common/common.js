@@ -44,12 +44,10 @@ global.commonInfo = (function () {
             pv -= pv_before;
             req -= req_before;
 
-        } else {
-
-            pv_before = pv;
-            req_before = req;
-
         }
+
+        pv_before = pv;
+        req_before = req;
 
         return D("Statistics").where({
             datetime: dateTime
