@@ -264,7 +264,7 @@ webpackJsonp([2],{
 	        }
 	        dispacher.list.trigger("show-loading");
 
-	        return $.ajax({
+	        var jqxhr = $.ajax({
 	            url: this.props.urlUpdate,
 	            dataType: 'json',
 	            method: 'post',
@@ -273,10 +273,16 @@ webpackJsonp([2],{
 	                title: title,
 	                content: content
 	            }
-	        }).done(function () {
+	        });
 
-	            self.closeDetail();
-	            dispacher.list.trigger("update-list");
+	        jqxhr.done(function (data) {
+
+	            if (data.type == "succ") {
+	                self.closeDetail();
+	                dispacher.list.trigger("update-list");
+	            } else {
+	                alert("更新失败");
+	            }
 	        }).fail((function (xhr, status, err) {
 
 	            console.error(this.props.url, status, err);
