@@ -7,8 +7,9 @@ webpackJsonp([2],{
 	var React = __webpack_require__(1);
 	var $ = __webpack_require__(157);
 	var moment = __webpack_require__(158);
-	var Dispatcher = __webpack_require__(244);
-	var LastUpdateTime = __webpack_require__(245);
+	var Dispatcher = __webpack_require__(246);
+	var LastUpdateTime = __webpack_require__(247);
+	var LoadingBar = __webpack_require__(248);
 
 	dispacher.list = new Dispatcher();
 
@@ -135,16 +136,20 @@ webpackJsonp([2],{
 
 	    getInitialState: function getInitialState() {
 	        dispacher.list.on("update-input-width", this.setInputWidth);
-	        return null;
+	        return {
+	            inputWidth: null
+	        };
 	    },
 	    componentDidMount: function componentDidMount() {
 	        this.setInputWidth();
-	        $(window).resize(this.setInputWidth);
+	        window.addEventListener("resize", this.handleResize);
 	    },
 	    setInputWidth: function setInputWidth() {
 	        var title = this.refs.title.getDOMNode();
 	        var addBtn = this.refs.addBtn.getDOMNode();
-	        title.style.width = parseInt(getComputedStyle(title.parentNode).width) - parseInt(getComputedStyle(addBtn).width) - 40 + "px";
+	        this.setState({
+	            inputWidth: parseInt(getComputedStyle(title.parentNode).width) - parseInt(addBtn.offsetWidth) - 35 + "px"
+	        });
 	    },
 	    addList: function addList(e) {
 	        var title = this.refs.title.getDOMNode().value.trim();
@@ -153,6 +158,9 @@ webpackJsonp([2],{
 	        }
 	        this.submitList({ title: title });
 	        this.refs.title.getDOMNode().value = '';
+	    },
+	    handleResize: function handleResize() {
+	        this.setInputWidth();
 	    },
 	    handleKeyDown: function handleKeyDown(e) {
 	        if (e.keyCode === 13) {
@@ -179,11 +187,15 @@ webpackJsonp([2],{
 	            dispacher.list.trigger("hide-loading");
 	        });
 	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	        window.removeEventListener("resize", this.handleResize);
+	    },
 	    render: function render() {
 	        return React.createElement(
 	            'div',
 	            { className: 'list-add cf' },
-	            React.createElement('input', { type: 'text', className: 'input-text', ref: 'title', onKeyDown: this.handleKeyDown,
+	            React.createElement('input', { type: 'text', className: 'input-text', ref: 'title', style: { width: this.state.inputWidth },
+	                onKeyDown: this.handleKeyDown,
 	                placeholder: 'add new list ...' }),
 	            React.createElement(
 	                'button',
@@ -401,34 +413,6 @@ webpackJsonp([2],{
 	    }
 	});
 
-	var LoadingBar = React.createClass({
-	    displayName: 'LoadingBar',
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            className: "loading"
-	        };
-	    },
-	    componentDidMount: function componentDidMount() {
-	        dispacher.list.on("show-loading", this.show);
-	        dispacher.list.on("hide-loading", this.hide);
-	    },
-	    show: function show() {
-	        this.setState({ className: "loading is-loading" });
-	    },
-	    hide: function hide() {
-	        this.setState({ className: "loading is-loading loading-complete" });
-	        dispacher.list.trigger("last-update-time");
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: 'loading-bar' },
-	            React.createElement('div', { ref: 'loadingBar', className: this.state.className })
-	        );
-	    }
-	});
-
 	var List = React.createClass({
 	    displayName: 'List',
 
@@ -453,7 +437,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 244:
+/***/ 246:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -469,7 +453,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 245:
+/***/ 247:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -514,6 +498,45 @@ webpackJsonp([2],{
 	});
 
 	module.exports = LastUpdateTime;
+
+/***/ },
+
+/***/ 248:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var LoadingBar = React.createClass({
+	    displayName: "LoadingBar",
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            className: "loading"
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        dispacher.list.on("show-loading", this.show);
+	        dispacher.list.on("hide-loading", this.hide);
+	    },
+	    show: function show() {
+	        this.setState({ className: "loading is-loading" });
+	    },
+	    hide: function hide() {
+	        this.setState({ className: "loading is-loading loading-complete" });
+	        dispacher.list.trigger("last-update-time");
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            { className: "loading-bar" },
+	            React.createElement("div", { ref: "loadingBar", className: this.state.className })
+	        );
+	    }
+	});
+
+	module.exports = LoadingBar;
 
 /***/ }
 

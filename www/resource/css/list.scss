@@ -90,12 +90,16 @@ $list-item-border-co: #e5e5e5;
           width: 100%;
           min-height: 50px;
           margin: $margin-val auto $margin-val (-$padding-padding);
+          resize: vertical;
+          overflow-y: auto;
         }
         .content {
           .my-textarea {
             width: 100%;
             min-height: 200px;
             margin: $margin-val auto $margin-val (-$padding-padding);
+            resize: vertical;
+            overflow-y: auto;
           }
         }
       }

@@ -170,11 +170,15 @@ body {
       .wrapper .list-con .list-detail-wrapper .list-detail-data .my-textarea {
         width: 100%;
         min-height: 50px;
-        margin: 7px auto 7px -8px; }
+        margin: 7px auto 7px -8px;
+        resize: vertical;
+        overflow-y: auto; }
       .wrapper .list-con .list-detail-wrapper .list-detail-data .content .my-textarea {
         width: 100%;
         min-height: 200px;
-        margin: 7px auto 7px -8px; }
+        margin: 7px auto 7px -8px;
+        resize: vertical;
+        overflow-y: auto; }
       .wrapper .list-con .list-detail-wrapper .del-btn {
         height: 32px;
         line-height: 32px;

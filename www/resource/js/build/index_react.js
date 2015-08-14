@@ -1,5 +1,31 @@
-webpackJsonp([1],[
-/* 0 */
+webpackJsonp([1],{
+
+/***/ 0:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var React = __webpack_require__(1);
+	var LoginBox = __webpack_require__(244);
+	var RegisterBox = __webpack_require__(245);
+
+	var LoginRegisterBox = React.createClass({
+	    displayName: 'LoginRegisterBox',
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(LoginBox, { urlLogin: '/home/index/login', urlRedirect: '/list' }),
+	            React.createElement(RegisterBox, { urlRegister: '/home/index/register', urlRedirect: '/list' })
+	        );
+	    }
+	});
+
+	React.render(React.createElement(LoginRegisterBox, null), document.getElementById('wrapper'));
+
+/***/ },
+
+/***/ 244:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -191,6 +217,18 @@ webpackJsonp([1],[
 	        );
 	    }
 	});
+
+	module.exports = LoginBox;
+
+/***/ },
+
+/***/ 245:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var React = __webpack_require__(1);
+	var $ = __webpack_require__(157);
+	var moment = __webpack_require__(158);
 
 	var RegisterBox = React.createClass({
 	    displayName: 'RegisterBox',
@@ -412,20 +450,8 @@ webpackJsonp([1],[
 	    }
 	});
 
-	var LoginRegisterBox = React.createClass({
-	    displayName: 'LoginRegisterBox',
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(LoginBox, { urlLogin: '/home/index/login', urlRedirect: '/list' }),
-	            React.createElement(RegisterBox, { urlRegister: '/home/index/register', urlRedirect: '/list' })
-	        );
-	    }
-	});
-
-	React.render(React.createElement(LoginRegisterBox, null), document.getElementById('wrapper'));
+	module.exports = RegisterBox;
 
 /***/ }
-]);
+
+});

@@ -4,6 +4,7 @@ var $ = require("jquery");
 var moment = require("moment");
 var Dispatcher = require('./dispacher');
 var LastUpdateTime = require('./up_time_react');
+var LoadingBar = require('./loading_bar_react');
 
 dispacher.list = new Dispatcher();
 
@@ -123,16 +124,20 @@ var ListCon = React.createClass({
 var ListAdd = React.createClass({
     getInitialState: function () {
         dispacher.list.on("update-input-width", this.setInputWidth);
-        return null;
+        return {
+            inputWidth: null
+        };
     },
     componentDidMount: function () {
         this.setInputWidth();
-        $(window).resize(this.setInputWidth);
+        window.addEventListener("resize", this.handleResize);
     },
     setInputWidth: function () {
         var title = this.refs.title.getDOMNode();
         var addBtn = this.refs.addBtn.getDOMNode();
-        title.style.width = (parseInt(getComputedStyle(title.parentNode).width) - parseInt(getComputedStyle(addBtn).width) - 40) + "px";
+        this.setState({
+            inputWidth: (parseInt(getComputedStyle(title.parentNode).width) - parseInt(addBtn.offsetWidth) - 35) + "px"
+        });
     },
     addList: function (e) {
         var title = this.refs.title.getDOMNode().value.trim();
@@ -141,6 +146,9 @@ var ListAdd = React.createClass({
         }
         this.submitList({title: title});
         this.refs.title.getDOMNode().value = '';
+    },
+    handleResize: function () {
+        this.setInputWidth();
     },
     handleKeyDown: function (e) {
         if (e.keyCode === 13) {
@@ -170,10 +178,14 @@ var ListAdd = React.createClass({
 
         });
     },
+    componentWillUnmount: function () {
+        window.removeEventListener("resize", this.handleResize);
+    },
     render: function () {
         return (
             <div className="list-add cf">
-                <input type="text" className="input-text" ref="title" onKeyDown={this.handleKeyDown}
+                <input type="text" className="input-text" ref="title" style={{width:this.state.inputWidth}}
+                       onKeyDown={this.handleKeyDown}
                        placeholder="add new list ..."/>
                 <button ref="addBtn" className="add" onClick={this.addList}>add</button>
             </div>
@@ -367,32 +379,6 @@ var ListShowComplete = React.createClass({
     }
 });
 
-var LoadingBar = React.createClass({
-    getInitialState: function () {
-        return {
-            className: "loading"
-        };
-    },
-    componentDidMount: function () {
-        dispacher.list.on("show-loading", this.show);
-        dispacher.list.on("hide-loading", this.hide);
-    },
-    show: function () {
-        this.setState({className: "loading is-loading"});
-    },
-    hide: function () {
-        this.setState({className: "loading is-loading loading-complete"});
-        dispacher.list.trigger("last-update-time");
-    },
-    render: function () {
-        return (
-            <div className="loading-bar">
-                <div ref="loadingBar" className={this.state.className}></div>
-            </div>
-        );
-    }
-});
-
 var List = React.createClass({
     render: function () {
         return (
@@ -407,7 +393,6 @@ var List = React.createClass({
         );
     }
 });
-
 
 React.initializeTouchEvents(true);
 React.render(
