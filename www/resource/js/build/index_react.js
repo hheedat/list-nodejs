@@ -318,6 +318,7 @@ webpackJsonp([1],[
 	                    pwd: '密码必须大于6位'
 	                }
 	            });
+	            return false;
 	        } else {
 	            this.setState({
 	                warning: {

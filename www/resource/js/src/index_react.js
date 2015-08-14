@@ -289,6 +289,7 @@ var RegisterBox = React.createClass({
                     pwd: '密码必须大于6位'
                 }
             });
+            return false;
         } else {
             this.setState({
                 warning: {
