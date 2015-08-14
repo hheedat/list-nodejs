@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.24, for osx10.8 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: think_list
+-- Host: localhost    Database: think_list
 -- ------------------------------------------------------
--- Server version	5.6.23
+-- Server version	5.6.24-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `think_list`;
 CREATE TABLE `think_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(500) DEFAULT NULL,
-  `content` varchar(1000) DEFAULT NULL,
+  `content` longtext,
   `time` datetime DEFAULT NULL,
   `belong` int(11) NOT NULL,
   `isuse` int(11) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `think_list` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `belong_idx` (`belong`),
   CONSTRAINT `belong` FOREIGN KEY (`belong`) REFERENCES `think_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -46,4 +46,4 @@ CREATE TABLE `think_list` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-31 11:44:23
+-- Dump completed on 2015-08-14 18:44:20
