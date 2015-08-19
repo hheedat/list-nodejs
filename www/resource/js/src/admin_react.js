@@ -21,8 +21,11 @@ var Analytics = React.createClass({
             dataType: 'json'
         }).done(function (data) {
 
-            console.log("data", data);
-            this.setState({info: data.msg});
+            if (data.type == 'succ') {
+                this.setState({info: data.msg});
+            } else {
+                alert('服务端出现了一些错误' + data.msg);
+            }
 
         }.bind(this)).fail(function (xhr, status, err) {
 
@@ -87,8 +90,11 @@ var UserInfo = React.createClass({
             dataType: 'json'
         }).done(function (data) {
 
-            console.log("data", data);
-            this.setState({count: data.msg});
+            if (data.type == 'succ') {
+                this.setState({count: data.msg});
+            } else {
+                alert('服务端出现了一些错误' + data.msg);
+            }
 
         }.bind(this)).fail(function (xhr, status, err) {
 
@@ -134,8 +140,11 @@ var ListInfo = React.createClass({
             dataType: 'json'
         }).done(function (data) {
 
-            console.log("data", data);
-            this.setState({count: data.msg});
+            if (data.type == 'succ') {
+                this.setState({count: data.msg});
+            } else {
+                alert('服务端出现了一些错误' + data.msg);
+            }
 
         }.bind(this)).fail(function (xhr, status, err) {
 

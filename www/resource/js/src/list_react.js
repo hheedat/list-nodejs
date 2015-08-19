@@ -24,7 +24,11 @@ var ListShow = React.createClass({
             method: 'post'
         }).done(function (data) {
 
-            this.updateList(data);
+            if (data.type == 'succ') {
+                this.updateList(data);
+            } else {
+                alert('服务端出现了一些错误' + data.msg);
+            }
 
         }.bind(this)).fail(function (xhr, status, err) {
 
@@ -83,7 +87,11 @@ var ListCon = React.createClass({
             }
         }).done(function (data) {
 
-            dispacher.list.trigger("update-list");
+            if (data.type == 'succ') {
+                dispacher.list.trigger("update-list");
+            } else {
+                alert('服务端出现了一些错误' + data.msg);
+            }
 
         }).fail(function (xhr, status, err) {
 
@@ -165,7 +173,11 @@ var ListAdd = React.createClass({
             data: data
         }).done(function (data) {
 
-            dispacher.list.trigger("update-list");
+            if (data.type == 'succ') {
+                dispacher.list.trigger("update-list");
+            } else {
+                alert('服务端出现了一些错误' + data.msg);
+            }
 
         }.bind(this)).fail(function (xhr, status, err) {
 
@@ -217,11 +229,15 @@ var ListDetail = React.createClass({
             }
         }).done(function (data) {
 
-            this.updateList(data);
-            setTimeout(function () {
-                $(this.refs.mask.getDOMNode()).addClass("list-detail-mask-show");
-                $(this.refs.wrapper.getDOMNode()).addClass("list-detail-wrapper-show");
-            }.bind(this));
+            if (data.type == 'succ') {
+                this.updateList(data);
+                setTimeout(function () {
+                    $(this.refs.mask.getDOMNode()).addClass("list-detail-mask-show");
+                    $(this.refs.wrapper.getDOMNode()).addClass("list-detail-wrapper-show");
+                }.bind(this));
+            } else {
+                alert('服务端出现了一些错误' + data.msg);
+            }
 
         }.bind(this)).fail(function (xhr, status, err) {
 
@@ -238,9 +254,8 @@ var ListDetail = React.createClass({
         if (!data) {
             return false;
         }
-        if (data.type === "succ") {
-            this.setState({data: data.msg});
-        }
+
+        this.setState({data: data.msg});
     },
     updateData: function () {
         var self = this;
@@ -269,7 +284,7 @@ var ListDetail = React.createClass({
                 self.closeDetail();
                 dispacher.list.trigger("update-list");
             } else {
-                alert("更新失败");
+                alert('服务端出现了一些错误' + data.msg);
             }
 
         }).fail(function (xhr, status, err) {
@@ -295,10 +310,14 @@ var ListDetail = React.createClass({
             data: {
                 id: this.dataID
             }
-        }).done(function () {
+        }).done(function (data) {
 
-            self.closeDetail();
-            dispacher.list.trigger("update-list");
+            if (data.type == "succ") {
+                self.closeDetail();
+                dispacher.list.trigger("update-list");
+            } else {
+                alert('服务端出现了一些错误' + data.msg);
+            }
 
         }).fail(function (xhr, status, err) {
 

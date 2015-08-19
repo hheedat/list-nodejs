@@ -27,8 +27,11 @@ webpackJsonp([0],[
 	            dataType: 'json'
 	        }).done((function (data) {
 
-	            console.log("data", data);
-	            this.setState({ info: data.msg });
+	            if (data.type == 'succ') {
+	                this.setState({ info: data.msg });
+	            } else {
+	                alert('服务端出现了一些错误' + data.msg);
+	            }
 	        }).bind(this)).fail((function (xhr, status, err) {
 
 	            alert("出现了一些问题");
@@ -125,8 +128,11 @@ webpackJsonp([0],[
 	            dataType: 'json'
 	        }).done((function (data) {
 
-	            console.log("data", data);
-	            this.setState({ count: data.msg });
+	            if (data.type == 'succ') {
+	                this.setState({ count: data.msg });
+	            } else {
+	                alert('服务端出现了一些错误' + data.msg);
+	            }
 	        }).bind(this)).fail((function (xhr, status, err) {
 
 	            alert("出现了一些问题");
@@ -186,8 +192,11 @@ webpackJsonp([0],[
 	            dataType: 'json'
 	        }).done((function (data) {
 
-	            console.log("data", data);
-	            this.setState({ count: data.msg });
+	            if (data.type == 'succ') {
+	                this.setState({ count: data.msg });
+	            } else {
+	                alert('服务端出现了一些错误' + data.msg);
+	            }
 	        }).bind(this)).fail((function (xhr, status, err) {
 
 	            alert("出现了一些问题");

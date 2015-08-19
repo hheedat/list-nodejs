@@ -31,7 +31,11 @@ webpackJsonp([2],{
 	            method: 'post'
 	        }).done((function (data) {
 
-	            this.updateList(data);
+	            if (data.type == 'succ') {
+	                this.updateList(data);
+	            } else {
+	                alert('服务端出现了一些错误' + data.msg);
+	            }
 	        }).bind(this)).fail((function (xhr, status, err) {
 
 	            alert("出现了一些问题");
@@ -90,7 +94,11 @@ webpackJsonp([2],{
 	            }
 	        }).done(function (data) {
 
-	            dispacher.list.trigger("update-list");
+	            if (data.type == 'succ') {
+	                dispacher.list.trigger("update-list");
+	            } else {
+	                alert('服务端出现了一些错误' + data.msg);
+	            }
 	        }).fail((function (xhr, status, err) {
 
 	            alert("出现了一些问题");
@@ -177,7 +185,11 @@ webpackJsonp([2],{
 	            data: data
 	        }).done((function (data) {
 
-	            dispacher.list.trigger("update-list");
+	            if (data.type == 'succ') {
+	                dispacher.list.trigger("update-list");
+	            } else {
+	                alert('服务端出现了一些错误' + data.msg);
+	            }
 	        }).bind(this)).fail((function (xhr, status, err) {
 
 	            console.error(this.props.url, status, err);
@@ -232,11 +244,15 @@ webpackJsonp([2],{
 	            }
 	        }).done((function (data) {
 
-	            this.updateList(data);
-	            setTimeout((function () {
-	                $(this.refs.mask.getDOMNode()).addClass("list-detail-mask-show");
-	                $(this.refs.wrapper.getDOMNode()).addClass("list-detail-wrapper-show");
-	            }).bind(this));
+	            if (data.type == 'succ') {
+	                this.updateList(data);
+	                setTimeout((function () {
+	                    $(this.refs.mask.getDOMNode()).addClass("list-detail-mask-show");
+	                    $(this.refs.wrapper.getDOMNode()).addClass("list-detail-wrapper-show");
+	                }).bind(this));
+	            } else {
+	                alert('服务端出现了一些错误' + data.msg);
+	            }
 	        }).bind(this)).fail((function (xhr, status, err) {
 
 	            console.error(this.props.url, status, err);
@@ -250,9 +266,8 @@ webpackJsonp([2],{
 	        if (!data) {
 	            return false;
 	        }
-	        if (data.type === "succ") {
-	            this.setState({ data: data.msg });
-	        }
+
+	        this.setState({ data: data.msg });
 	    },
 	    updateData: function updateData() {
 	        var self = this;
@@ -281,7 +296,7 @@ webpackJsonp([2],{
 	                self.closeDetail();
 	                dispacher.list.trigger("update-list");
 	            } else {
-	                alert("更新失败");
+	                alert('服务端出现了一些错误' + data.msg);
 	            }
 	        }).fail((function (xhr, status, err) {
 
@@ -304,10 +319,14 @@ webpackJsonp([2],{
 	            data: {
 	                id: this.dataID
 	            }
-	        }).done(function () {
+	        }).done(function (data) {
 
-	            self.closeDetail();
-	            dispacher.list.trigger("update-list");
+	            if (data.type == "succ") {
+	                self.closeDetail();
+	                dispacher.list.trigger("update-list");
+	            } else {
+	                alert('服务端出现了一些错误' + data.msg);
+	            }
 	        }).fail((function (xhr, status, err) {
 
 	            console.error(this.props.url, status, err);
