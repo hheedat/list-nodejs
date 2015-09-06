@@ -16,8 +16,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
+    "build": "webpack -p --optimize-minimize",
+    "dev": "webpack -w"
   },
   "engines": {
     "node": ">=0.10.0"

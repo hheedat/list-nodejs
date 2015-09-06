@@ -1,7 +1,22 @@
 <%- include('../Common/header',{
     CSSList:['/resource/css/reset.css','/resource/css/index.css']
 }) %>
-<div id="wrapper"></div>
+<div id="wrapper">
+    <div style="padding:20px">
+        Loading <span id="dots">...</span>
+        <script>
+            var dot = document.getElementById("dots");
+
+            function loading() {
+                setTimeout(function() {
+                    dot.textContent = dot.textContent + ".";
+                    loading();
+                }, 200);
+            }
+            loading();
+        </script>
+    </div>
+</div>
 <%- include('../Common/footer',{
     JSList:[
         '/resource/js/build/common.js',

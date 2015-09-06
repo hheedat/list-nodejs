@@ -2,7 +2,20 @@
     CSSList:['/resource/css/reset.css','/resource/css/list.css']
 }) %>
 <div class="wrapper">
-    <div id="list-con" class="list-con">welcome to list</div>
+    <div id="list-con" class="list-con">
+        Loading <span id="dots">...</span>
+        <script>
+            var dot = document.getElementById("dots");
+
+            function loading() {
+                setTimeout(function() {
+                    dot.textContent = dot.textContent + ".";
+                    loading();
+                }, 200);
+            }
+            loading();
+        </script>
+    </div>
 </div>
 <%- include('../Common/footer',{
    JSList:[
