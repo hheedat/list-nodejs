@@ -1,6 +1,20 @@
 //这里定义一些全局通用的函数，该文件会被自动加载
 var moment = require("moment");
 
+var log = global.console.log;
+
+global.console.log = function () {
+
+    var timestamp = moment().format() + " ";
+
+    var arg = Array.prototype.slice.call(arguments);
+    arg.unshift(timestamp);
+    arg.push("\n\n");
+
+    log.apply(null, arg);
+
+}
+
 global.commonInfo = (function () {
     var pv;
     var req;
@@ -9,7 +23,7 @@ global.commonInfo = (function () {
 
     var SAVE_INFO_TIMER = 1000 * 60 * 10;
     var dateFlag;
-    //var SAVE_INFO_TIMER = 1000 * 15;
+    //var SAVE_INFO_TIMER = 1000 * 5;
 
     function startCount() {
 
@@ -21,9 +35,12 @@ global.commonInfo = (function () {
             if (!isEmpty(data)) {
                 pv_before = pv = data.pv;
                 req_before = req = data.req;
+
+                console.log("start statistics from database succ, pv : ", pv, " req : ", req);
             } else {
                 pv_before = pv = 0;
                 req_before = req = 0;
+                console.log("can not statistics from database , pv : ", pv, " req : ", req);
             }
         }).catch(function (err) {
 
@@ -65,7 +82,7 @@ global.commonInfo = (function () {
 
                     if (affectedRows) {
 
-                        console.log("update info succ, affectedRows is : " + affectedRows);
+                        console.log("update statistics succ, affectedRows is : " + affectedRows + " pv : " + pv + " req : " + req);
 
                     } else {
 
@@ -90,7 +107,7 @@ global.commonInfo = (function () {
 
                     if (insertId) {
 
-                        console.log("add info succ, id is : " + insertId);
+                        console.log("add statistics succ, id is : " + insertId + " pv : " + pv + " req : " + req);
 
                     } else {
 
@@ -100,7 +117,7 @@ global.commonInfo = (function () {
 
                 }).catch(function (err) {
 
-                    console.log("add info fail : ", {type: "err", "msg": err});
+                    console.log("add statistics fail : " + err + " pv : " + pv + " req : " + req);
 
                 });
 
