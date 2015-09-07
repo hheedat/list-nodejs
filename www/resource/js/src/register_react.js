@@ -1,7 +1,7 @@
 'use strict';
-var React = require('react');
-var $ = require("jquery");
-var moment = require("moment");
+//var React = require('react');
+//var $ = require("jquery");
+//var moment = require("moment");
 
 var RegisterBox = React.createClass({
     checkFlag: false,
@@ -85,7 +85,7 @@ var RegisterBox = React.createClass({
         if (regEmpty.test(username)) {
             this.setState({
                 warning: {
-                    username: '请输入您的用户名'
+                    username: '请输入用户名'
                 }
             });
             return false;
@@ -100,14 +100,14 @@ var RegisterBox = React.createClass({
         if (regEmpty.test(mail)) {
             this.setState({
                 warning: {
-                    mail: '请输入您的邮箱'
+                    mail: '请输入邮箱'
                 }
             });
             return false;
         } else if (!regMail.test(mail)) {
             this.setState({
                 warning: {
-                    mail: '您输入的不是一个合法的邮箱'
+                    mail: '不是一个合法的邮箱'
                 }
             });
             return false;
@@ -122,7 +122,7 @@ var RegisterBox = React.createClass({
         if (regEmpty.test(pwd)) {
             this.setState({
                 warning: {
-                    pwd: '请输入您的密码'
+                    pwd: '请输入密码'
                 }
             });
             return false;

@@ -1,7 +1,7 @@
 'use strict';
-var React = require("react");
-var $ = require("jquery");
-var moment = require("moment");
+//var React = require("react");
+//var $ = require("jquery");
+//var moment = require("moment");
 
 var Analytics = React.createClass({
     loadTimer: null,

@@ -1,5 +1,5 @@
-var React = require('react');
-var moment = require("moment");
+//var React = require('react');
+//var moment = require("moment");
 
 var LastUpdateTime = React.createClass({
     timer: null,

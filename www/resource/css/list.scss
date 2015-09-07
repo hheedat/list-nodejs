@@ -53,8 +53,8 @@ $list-item-border-co: #e5e5e5;
     .list-detail-mask-show {
       background-color: rgba(0, 0, 0, 0.6);
     }
-    $padding-padding:8px;
-    $margin-val:7px;
+    $padding-padding: 8px;
+    $margin-val: 7px;
     .list-detail-wrapper {
       position: absolute;
       transition: top 0.3s;
@@ -65,6 +65,8 @@ $list-item-border-co: #e5e5e5;
       height: 80%;
       background-color: #fff;
       border-radius: 4px 4px 0 0;
+
+      //border-radius: 4px;
       .list-detail {
         padding: 0 ($padding-padding+5);
       }
@@ -133,7 +135,7 @@ $list-item-border-co: #e5e5e5;
   }
 }
 
-$loading-bar-co:orange;
+$loading-bar-co: orange;
 .loading-bar {
   position: absolute;
   left: 0;

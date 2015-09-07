@@ -25,7 +25,7 @@ var config = {
         noParse: ['react', 'moment', 'jquery']
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('common.js', ['index_react', 'list_react', 'admin_react'])
+        //new webpack.optimize.CommonsChunkPlugin('common.js', ['index_react', 'list_react', 'admin_react'])
     ]
 }
 

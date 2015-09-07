@@ -1,4 +1,4 @@
-var $ = require('jquery');
+//var $ = require('jquery');
 
 var Dispacher = window.Dispatcher = function () {
     $.extend(this, $({}));

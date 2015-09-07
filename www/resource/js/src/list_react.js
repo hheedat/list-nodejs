@@ -1,7 +1,7 @@
 'use strict';
-var React = require('react');
-var $ = require("jquery");
-var moment = require("moment");
+//var React = require('react');
+//var $ = require("jquery");
+//var moment = require("moment");
 var Dispatcher = require('./dispacher');
 var LastUpdateTime = require('./up_time_react');
 var LoadingBar = require('./loading_bar_react');
@@ -234,7 +234,7 @@ var ListDetail = React.createClass({
                 setTimeout(function () {
                     $(this.refs.mask.getDOMNode()).addClass("list-detail-mask-show");
                     $(this.refs.wrapper.getDOMNode()).addClass("list-detail-wrapper-show");
-                }.bind(this));
+                }.bind(this), 100);
             } else {
                 alert('服务端出现了一些错误' + data.msg);
             }
@@ -332,11 +332,11 @@ var ListDetail = React.createClass({
     },
     closeDetail: function (e) {
         if (!e || e.target.className.match(/list-detail-mask/) || e.target.className == "close-btn") {
-            $(this.refs.wrapper.getDOMNode()).removeClass("list-detail-wrapper-show");
+            $(this.refs.mask.getDOMNode()).removeClass("list-detail-mask-show");
             $(this.refs.wrapper.getDOMNode()).removeClass("list-detail-wrapper-show");
             setTimeout(function () {
                 this.setState({data: null});
-            }.bind(this), 200);
+            }.bind(this), 100);
         }
     },
     render: function () {
@@ -357,6 +357,7 @@ var ListDetail = React.createClass({
 
                                 <div className="content">
                                     <textarea className="my-textarea" ref="content"
+                                              style={{height:window.innerHeight*0.8-220}}
                                               defaultValue={this.state.data.content}/>
                                 </div>
                             </div>

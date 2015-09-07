@@ -4,7 +4,7 @@ var URL_UPDATE = "/home/list/update";
 var URL_CHECK = "/home/list/check";
 var URL_CHECKDETAIL = "/home/list/checkDetail";
 
-var title = "test_title1";
+var title = "test_title";
 var content = "test_content";
 var time = "";
 
