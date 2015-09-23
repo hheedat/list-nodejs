@@ -116,7 +116,7 @@ var ListCon = React.createClass({
                            defaultChecked={item.status ? false : true}/>
                     <span className="list-title">{item.title}</span>
                     <span className="list-time">
-                        { moment().date() != moment(item.time).date() ? moment().format("l") : moment(item.time).startOf('second').fromNow()}
+                        { (moment().date() != moment(item.time).date()) ? moment(item.time).format("l") : moment(item.time).startOf('second').fromNow()}
                     </span>
                 </div>
             );
