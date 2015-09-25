@@ -60,29 +60,16 @@ module.exports = Controller("Home/BaseController", function () {
             }
         },
         itemCompleteAction: function () {
-            var self = this;
-            if (self.isPost()) {
-                var id = self.post("id");
-                if (isEmpty(id)) return self.json({type: "err", msg: "id is empty"});
 
-                return D("List").where({
-                    "id": id
-                }).update({
-                    "status": 0
-                }).then(function (affectedRows) {
-                    console.log("delete update affectedRows", affectedRows);
-                    if (affectedRows) {
-                        return self.json({type: "succ", msg: "success"});
-                    } else {
-                        return self.json({type: "err", msg: "this id have no data"});
-                    }
-                }).catch(function (err) {
-                    console.log({type: "err", "msg": err});
-                    return self.json({type: "err", "msg": "update fail"});
-                });
-            }
+            this.itemStatusAction(0);
+
         },
         itemUndoAction: function () {
+
+            this.itemStatusAction(1);
+
+        },
+        itemStatusAction: function (status) {
             var self = this;
             if (self.isPost()) {
                 var id = self.post("id");
@@ -91,7 +78,7 @@ module.exports = Controller("Home/BaseController", function () {
                 return D("List").where({
                     "id": id
                 }).update({
-                    "status": 1
+                    "status": status
                 }).then(function (affectedRows) {
                     console.log("delete update affectedRows", affectedRows);
                     if (affectedRows) {
@@ -111,7 +98,7 @@ module.exports = Controller("Home/BaseController", function () {
                 var id = self.post("id");
                 var title = self.post("title");
                 var content = self.post("content");
-                //var time = moment().format("YYYY-MM-DD hh:mm:ss");
+                var time = moment().format("YYYY-MM-DD HH:mm:ss");
 
                 if (isEmpty(id) || (isEmpty(title) && isEmpty(content))) {
                     return self.json({type: "err", msg: "missing parameter"});
@@ -121,7 +108,8 @@ module.exports = Controller("Home/BaseController", function () {
                     "id": id
                 }).update({
                     "title": title,
-                    "content": content
+                    "content": content,
+                    "time": time
                 }).then(function (affectedRows) {
                     console.log("update affectedRows", affectedRows);
                     if (affectedRows) {
